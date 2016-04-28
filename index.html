@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ITP Energy</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Raleway:700,400,100' rel='stylesheet' type='text/css'>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/d3/2.10.0/d3.v2.min.js "></script>
+
+    <script src="index.js"></script>
+  </head>
+  <body>
+    <div class="input-slider-container">
+      <div class="input-slider-label"> Start Time : </div>
+      <input class="input-slider" id="time-range" type="range" value="22" min="0" max="24"> </input>
+      <div class="input-slider-value">  </div>
+      <button class="input-slider-button">Find Energy for selected time</button>
+    </div>
+    
+    <div class="floorData" id="floorData">
+    </div>
+    <div class="roomData" id="roomData">
+    </div>
+
+
+  </body>
+</html>

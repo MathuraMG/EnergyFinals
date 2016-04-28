@@ -1,0 +1,23 @@
+.roomData {
+  display: inline-block;
+  width: 49%;
+  vertical-align:top;
+}
+.floorData {
+  display: inline-block;
+  width: 49%;
+}
+
+.energy-key-name {
+  display: inline-block;
+  width: 50%;
+  font-family: Raleway;
+  font-weight: 700;
+}
+
+.energy-value {
+  display: inline-block;
+  width: 50%;
+  font-family: Raleway;
+  font-weight: 400;
+}
