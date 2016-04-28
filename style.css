@@ -21,3 +21,16 @@
   font-family: Raleway;
   font-weight: 400;
 }
+
+.input-slider-container {
+  display: block;
+  width: 100%;
+  font-family: Raleway;
+  font-size: 1em;
+  text-align: center;
+}
+
+.input-slider-button  {
+  margin: 15px auto;
+  font-size: 1em;
+}
