@@ -64,6 +64,7 @@ function makeAjaxCallToGetSchema(timeRange)
         var energyValue;
         console.log(subLocationData.length);
         $('.floorData').empty();
+        $('.roomData').empty();
         for(var i =0;i<subLocationData.length;i++){
           if(subLocationData[i].data.names[0] && subLocationData[i].totalEnergy)
           {
