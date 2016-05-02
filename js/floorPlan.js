@@ -45,7 +45,7 @@
 	//                 right  click to pan
 
   var controls;
-    controls = new THREE.OrbitControls( camera );
+    controls = new THREE.OrbitControls( camera,renderer.domElement );
     controls.addEventListener( 'change', render );
 	//var controls = new THREE.OrbitControls( camera, renderer.domElement );
 

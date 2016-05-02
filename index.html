@@ -5,6 +5,8 @@
     <title>ITP Energy</title>
     <link rel="stylesheet" href="style.css">
     <link href='https://fonts.googleapis.com/css?family=Raleway:700,400,100' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Wire+One' rel='stylesheet' type='text/css'>
+
 
     <!-- libraries from cdn -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -16,8 +18,8 @@
     <!-- js file to plot graphs per room -->
     <script src="js/graph.js"></script>
 
-    <!-- js file that gets data from the server -->
-    <script src="js/dataCalls.js"></script>
+    <!-- js file to do housekeeping stuff -->
+    <script src="js/houseKeeping.js"></script>
 
 
     <!-- libraries -->
@@ -27,7 +29,6 @@
 
     <script type="text/javascript" src="js/THREEx.FullScreen.js"></script>
     <script type="text/javascript" src="js/THREEx.WindowResize.js"></script>
-
 
 
 
@@ -48,7 +49,7 @@
       </div>
 
       <h1>three.js test</h1>
-      <div id="dataviz"></div>
+      <!-- <div id="dataviz"></div> -->
 
     </section>
 
@@ -63,16 +64,14 @@
       <div class="roomData" id="roomData">
 
       </div>
-      <div class='room-data-graph-container'>
-
+      <div class='back-to-home'>
+        View Full Floor
       </div>
     </section>
+    <!-- js file that gets data from the server -->
+    <script src="js/index.js"></script>
 
 
-
-
-
-    <!-- <script type="text/javascript" src="js/floorPlan.js"></script> -->
 
   </body>
 </html>
