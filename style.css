@@ -1,29 +1,45 @@
 /******************
 MAIN DIVS
 ******************/
+
+.floor-data-section {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  float: left;
+}
+
+.floorData {
+  display: inline-block;
+  width: 49%;
+  height: 100%;
+  float: right;
+}
+
+.info-viz {
+  display: inline-block;
+  width: 51%;
+  height: 100%;
+  float: left;
+}
+
+
 .roomData {
   display: inline-block;
   width: 49%;
   vertical-align:top;
 }
-.floorData {
-  display: inline-block;
-  width: 49%;
-}
+
 .room-data-section {
   display: none;
 }
-.floor-data-section {
-  width: 49%;
-  display: inline-block;
-  float: right;
-}
+
 .three-model-container {
-  /*float: left;*/
+  /*float: right;*/
   width: 50%;
   height: 70%;
   display: inline-block;
-  position: absolute;
+  /*position: absolute;*/
   top: 0;
   left:0;
 }
@@ -43,6 +59,15 @@ FOR TEXT DISPLAY
   width: 50%;
   font-family: Raleway;
   font-weight: 400;
+}
+
+/******************
+Page 1 - ID
+******************/
+
+#embed-most-used-equipment-image {
+  display: inline-block;
+  float: left;
 }
 
 /******************
@@ -74,6 +99,8 @@ INPUTS
 /******************
 LINE GRAPH
 ******************/
+
+
 
 #visualisation {
   display: inline-block;

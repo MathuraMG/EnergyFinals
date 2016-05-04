@@ -53,10 +53,8 @@ console.log(render);
 
 //set controls (using lib - OrbitControls.js)
 var controls;
-  controls = new THREE.OrbitControls( camera, renderer.domElement );
-  controls.addEventListener( 'change', render );
-//var controls = new THREE.OrbitControls( camera, renderer.domElement );
-
+controls = new THREE.OrbitControls( camera, renderer.domElement );
+controls.addEventListener( 'change', render )
 
 // create a light
 var light = new THREE.PointLight(0xFFFF00);
@@ -73,6 +71,8 @@ scene.add(light);
 
 var ambientLight = new THREE.AmbientLight(0x111111);
 scene.add(ambientLight);
+
+
 
 function makeAjaxCallToGetSchema(timeRange)
 {
@@ -228,6 +228,7 @@ function showGraph(subLocationData) {
       color: 0xffffff
       }
     ),
+
     cube = new THREE.Mesh( geom, mat );
     scene.add(cube);
     //mat.color.setRGB(255, 170, 150);
@@ -306,6 +307,14 @@ function setupInputSliderButton()
     var a = new Date(new Date() - noOfHours*60000*60);
     $('.input-slider-value').html(a.toString().slice(0,-15));
   })
+}
+
+//display most used Equipment in the last 5 hours
+function showMostUsedEquipmentLast5Hours() {
+  var mostUsedEquipmentLast5Hours = d3.select("#embed-most-used-equipment-image").append("img")
+      .attr("src","http://upload.wikimedia.org/wikipedia/commons/b/b0/NewTux.svg")
+      .attr("width", 200)
+      .attr("height", 200)
 }
 
 //
@@ -457,6 +466,7 @@ function drawTreeMap(equipmentData){
           return Math.max(0.5, 0.01*Math.sqrt(d.area))+'em'; })
       .text(function(d) { return d.children ? null : d.name + ' ('+ Math.floor(d.value) + ')'; });
 }
+
 
 function treeMapPosition() {
 
