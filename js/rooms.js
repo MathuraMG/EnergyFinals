@@ -2,10 +2,11 @@ var rooms = [
 
   {
     name: "room455",
-    id: 0,
+    equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
     xpos: 29, //0
     ypos: 32, //0
     zpos: 0,
+    sublocationId: ["9b32823e-4e37-46e5-b7d4-b6c50bd73d74"],
 
     w: 58,
     l: 64,
@@ -18,10 +19,11 @@ var rooms = [
 
 {
   name: "room454",
-  id: 1,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 87, //58
   ypos: 23.5, //0
   zpos: 0,
+  sublocationId: [],
 
   w: 58,
   l: 47,
@@ -34,10 +36,11 @@ var rooms = [
 
 {
   name: "room453",
-  id: 2,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 134,
   ypos: 23.5,
   zpos: 0,
+  sublocationId: [],
 
   w: 36,
   l: 47,
@@ -50,10 +53,11 @@ var rooms = [
 
 {
   name: "room452",
-  id: 3,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 167,
   ypos: 23.5,
   zpos: 0,
+  sublocationId: [],
 
   w: 30,
   l: 47,
@@ -67,10 +71,11 @@ var rooms = [
 
 {
   name: "room451b",
-  id: 4,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 198.5,
   ypos: 23.5,
   zpos: 0,
+  sublocationId: [],
 
   w: 33,
   l: 47,
@@ -83,10 +88,11 @@ var rooms = [
 
 {
   name: "room451a",
-  id: 5,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 231.5,
   ypos: 23.5,
   zpos: 0,
+  sublocationId: [],
 
   w: 33,
   l: 47,
@@ -100,10 +106,11 @@ var rooms = [
 
 {
   name: "room449",
-  id: 6,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 263.5,
   ypos: 23.5,
   zpos: 0,
+  sublocationId: [],
 
   w: 31,
   l: 47,
@@ -116,10 +123,11 @@ var rooms = [
 
 {
   name: "room448",
-  id: 7,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 298,
   ypos: 23.5,
   zpos: 0,
+  sublocationId: [],
 
   w: 38,
   l: 47,
@@ -132,10 +140,11 @@ var rooms = [
 
 {
   name: "room446",
-  id: 8,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 344.5,
   ypos: 23.5,
   zpos: 0,
+  sublocationId: [],
 
   w: 55,
   l: 47,
@@ -148,10 +157,11 @@ var rooms = [
 
 {
   name: "lounge",
-  id: 9,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 439.5,
   ypos: 41.5,
   zpos: 0,
+  sublocationId: [],
 
   w: 135,
   l: 83,
@@ -164,10 +174,11 @@ var rooms = [
 
 {
   name: "room444",
-  id: 10,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 527.5,
   ypos: 29.5,
   zpos: 0,
+  sublocationId: [],
 
   w: 41,
   l: 59,
@@ -180,10 +191,11 @@ var rooms = [
 
 {
   name: "room442",
-  id: 11,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 600,
   ypos: 29.5,
   zpos: 0,
+  sublocationId: [],
 
   w: 104,
   l: 59,
@@ -196,10 +208,11 @@ var rooms = [
 
 {
   name: "room441",
-  id: 12,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 696.5,
   ypos: 42.5,
   zpos: 0,
+  sublocationId: [],
 
   w: 89,
   l: 87,
@@ -212,10 +225,11 @@ var rooms = [
 
 {
   name: "room440",
-  id: 13,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 723.5,
   ypos: 129.5,
   zpos: 0,
+  sublocationId: [],
 
   w: 35,
   l: 87,
@@ -228,10 +242,11 @@ var rooms = [
 
 {
   name: "lockersBack",
-  id: 14,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 673.5,
   ypos: 161,
   zpos: 0,
+  sublocationId: [],
 
   w: 65,
   l: 24,
@@ -244,10 +259,11 @@ var rooms = [
 
 {
   name: "stairsBack",
-  id: 15,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 599.5,
   ypos: 156,
   zpos: 0,
+  sublocationId: [],
 
   w: 83,
   l: 34,
@@ -260,10 +276,11 @@ var rooms = [
 
 {
   name: "electrical",
-  id: 16,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 601,
   ypos: 129,
   zpos: 0,
+  sublocationId: [],
 
   w: 52,
   l: 20,
@@ -276,10 +293,11 @@ var rooms = [
 
 {
   name: "cabinet",
-  id: 17,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 566.5,
   ypos: 116,
   zpos: 0,
+  sublocationId: [],
 
   w: 17,
   l: 46,
@@ -292,10 +310,11 @@ var rooms = [
 
 {
   name: "room445",
-  id: 18,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 514.5,
   ypos: 133,
   zpos: 0,
+  sublocationId: [],
 
   w: 87,
   l: 80,
@@ -308,10 +327,11 @@ var rooms = [
 
 {
   name: "room447",
-  id: 19,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 336,
   ypos: 133,
   zpos: 0,
+  sublocationId: [],
 
   w: 122,
   l: 80,
@@ -324,10 +344,11 @@ var rooms = [
 
 {
   name: "room446",
-  id: 20,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 256.5,
   ypos: 133,
   zpos: 0,
+  sublocationId: [],
 
   w: 37,
   l: 80,
@@ -340,10 +361,11 @@ var rooms = [
 
 {
   name: "mechanical",
-  id: 21,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 209,
   ypos: 144,
   zpos: 0,
+  sublocationId: [],
 
   w: 58,
   l: 58,
@@ -356,10 +378,11 @@ var rooms = [
 
 {
   name: "marlon",
-  id: 22,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 197.5,
   ypos: 100.5,
   zpos: 0,
+  sublocationId: [],
 
   w: 35,
   l: 29,
@@ -372,10 +395,11 @@ var rooms = [
 
 {
   name: "restroomW",
-  id: 23,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 164,
   ypos: 118.5,
   zpos: 0,
+  sublocationId: [],
 
   w: 33,
   l: 78,
@@ -388,10 +412,11 @@ var rooms = [
 
 {
   name: "restroomM",
-  id: 24,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 132,
   ypos: 118.5,
   zpos: 0,
+  sublocationId: [],
 
   w: 33,
   l: 78,
@@ -404,10 +429,11 @@ var rooms = [
 
 {
   name: "stairsAdjunct",
-  id: 25,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 87,
   ypos: 151,
   zpos: 0,
+  sublocationId: [],
 
   w: 59,
   l: 45,
@@ -420,10 +446,11 @@ var rooms = [
 
 {
   name: "adjunctLounge",
-  id: 26,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 87,
   ypos: 88,
   zpos: 0,
+  sublocationId: [],
 
   w: 59,
   l: 83,
@@ -436,10 +463,11 @@ var rooms = [
 
 {
   name: "techStaff",
-  id: 27,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 29,
   ypos: 105,
   zpos: 0,
+  sublocationId: [],
 
   w: 59,
   l: 83,
@@ -452,10 +480,11 @@ var rooms = [
 
 {
   name: "shopPowerTools",
-  id: 28,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 29,
   ypos: 241.5,
   zpos: 0,
+  sublocationId: ["b121b9e6-44e6-40b3-b787-ee667bfa084d"],
 
   w: 59,
   l: 118,
@@ -468,10 +497,11 @@ var rooms = [
 
 {
  name: "shop",
- id: 29,
+ equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
  xpos: 167.5,
  ypos: 234,
  zpos: 0,
+ sublocationId: [],
 
  w: 220,
  l: 103,
@@ -484,10 +514,11 @@ var rooms = [
 
    {
      name: "stairsShop",
-     id: 30,
+     equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
      xpos: 90,
      ypos: 305.5,
      zpos: 0,
+     sublocationId: [],
 
      w: 65,
      l: 42,
@@ -500,10 +531,11 @@ var rooms = [
 
    {
      name: "shopRestroomM",
-     id: 31,
+     equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
      xpos: 136,
      ypos: 308,
      zpos: 0,
+     sublocationId: [],
 
      w: 29,
      l: 47,
@@ -516,10 +548,11 @@ var rooms = [
 
    {
      name: "shopRestroomW",
-     id: 32,
+     equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
      xpos: 164.5,
      ypos: 308,
      zpos: 0,
+     sublocationId: [],
 
      w: 30,
      l: 47,
@@ -532,10 +565,11 @@ var rooms = [
 
 {
   name: "room20",
-  id: 33,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 325.5,
   ypos: 246,
   zpos: 0,
+  sublocationId: [],
 
   w: 98,
   l: 79,
@@ -548,10 +582,11 @@ var rooms = [
 
 {
   name: "workArea",
-  id: 34,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 466,
   ypos: 270.5,
   zpos: 0,
+  sublocationId: [],
 
   w: 185,
   l: 128,
@@ -564,10 +599,11 @@ var rooms = [
 
 {
   name: "meetingRoom",
-  id: 35,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 592.5,
   ypos: 253,
   zpos: 0,
+  sublocationId: [],
 
   w: 68,
   l: 93,
@@ -580,10 +616,11 @@ var rooms = [
 
 {
   name: "stairsMain",
-  id: 36,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 600,
   ypos: 316.5,
   zpos: 0,
+  sublocationId: [],
 
   w: 83,
   l: 36,
@@ -596,10 +633,11 @@ var rooms = [
 
 {
   name: "MainElevator",
-  id: 37,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 675.5,
   ypos: 322.5,
   zpos: 0,
+  sublocationId: [],
 
   w: 70,
   l: 26,
@@ -612,10 +650,11 @@ var rooms = [
 
 {
   name: "danO",
-  id: 38,
+  equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
   xpos: 727.5,
   ypos: 309.5,
   zpos: 0,
+  sublocationId: [],
 
   w: 36,
   l: 50,

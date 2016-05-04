@@ -20,7 +20,8 @@ $(document).ready(function(){
 //Three.js
 //set scene
 var scene = new THREE.Scene();
-var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
+
+var SCREEN_WIDTH = window.innerWidth/2, SCREEN_HEIGHT = window.innerHeight*0.7;
 var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 20000;
 
 
@@ -44,8 +45,11 @@ THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) }); // toggle full-scre
 var render = function() {
   requestAnimationFrame( render );
   renderer.render(scene, camera);
-  renderer.setSize(window.innerWidth - 20, window.innerHeight - 20);
+  renderer.setSize(window.innerWidth/2 - 20, window.innerHeight*0.7 - 20);
 };
+
+console.log("*****************MATHURA***************");
+console.log(render);
 
 //set controls (using lib - OrbitControls.js)
 var controls;
@@ -143,6 +147,9 @@ function makeAjaxCallToGetSchema(timeRange)
               console.log(this);
               console.log(this.id);
               getRoomData(this.id);
+              $('.room-data-section').fadeIn(500);
+              $('.floor-data-section').fadeOut(500);
+              $('.three-model-container').fadeOut(500);
             })
           }
         }
@@ -188,17 +195,6 @@ function getRoomData(roomId)
         for(var i =0;i<equipmentData.length;i++){
           if(equipmentData[i].data.names[0] && equipmentData[i].totalEnergy)
           {
-            // energyKey = $('<div>');
-            // energyKey.attr('class','energy-key-name');
-            // energyKey.attr('id',equipmentData[i].id);
-            // energyKey.html(equipmentData[i].data.names[0]);
-            // energyKey.data('room-id',equipmentData[i].id);
-            // $('.roomData').append(energyKey);
-            // energyValue = $('<div>');
-            // energyValue.attr('class','energy-value');
-            // energyValue.html((equipmentData[i].totalEnergy*1000).toFixed(2)+ ' W' );
-            // $('.roomData').append(energyValue);
-
             energyKey.click(function(){
               console.log(this);
               console.log(this.id);
@@ -216,43 +212,85 @@ function getRoomData(roomId)
 
 }
 
+var cubes;
+
 function showGraph(subLocationData) {
   var range = 10;
+  cubes = new THREE.Object3D();
+  scene.add( cubes );
 
+  for(var i = 0; i < rooms.length; i++ ) {
 
+    var geom = new THREE.CubeGeometry( rooms[i].w, rooms[i].l, subLocationData[i].totalEnergy*5  );
+    var grayness = Math.random() * 0.5 + 0.25,
+    mat = new THREE.MeshLambertMaterial(
+      {
+      color: 0xffffff
+      }
+    ),
+    cube = new THREE.Mesh( geom, mat );
+    scene.add(cube);
+    //mat.color.setRGB(255, 170, 150);
+    //mat.color.setRGB(Math.random(0,255),Math.random(0,255),150);
+    cube.position.set(rooms[i].xpos, rooms[i].ypos, subLocationData[i].totalEnergy*5/2); // change the center of 'z' to the base
+    //cube.position.set( range * (0.5 - Math.random()), range * (0.5 - Math.random()), range * (0.5 - Math.random()) );
+    cube.rotation.set( 0, 0, 0);
+    cube.grayness = grayness; // *** NOTE THIS
+    cube.userData = {
+               id: rooms[i].equipments,
+           };
+    cubes.add( cube );
 
-     for(var i = 0; i < rooms.length; i++ ) {
-       console.log(rooms[i]);
-
-        var geom = new THREE.CubeGeometry( rooms[i].w, rooms[i].l, subLocationData[i].totalEnergy*5  );
-             var grayness = Math.random() * 0.5 + 0.25,
-                     mat = new THREE.MeshLambertMaterial(
-                       {
-                         color: 0xffffff
-                       }
-                     ),
-                     cube = new THREE.Mesh( geom, mat );
-                    scene.add(cube);
-             //mat.color.setRGB(255, 170, 150);
-             //mat.color.setRGB(Math.random(0,255),Math.random(0,255),150);
-             cube.position.set(rooms[i].xpos, rooms[i].ypos, subLocationData[i].totalEnergy*5/2); // change the center of 'z' to the base
-             //cube.position.set( range * (0.5 - Math.random()), range * (0.5 - Math.random()), range * (0.5 - Math.random()) );
-             cube.rotation.set( 0, 0, 0);
-             cube.grayness = grayness; // *** NOTE THIS
-            //  cubes.add( cube );
-
-     }
+  }
 }
 
+var mouseVector = new THREE.Vector3();
+var raycaster = new THREE.Raycaster();
 
+window.addEventListener( 'mousemove', onMouseMove, false );
+$('canvas').wrap("<div class='three-model-container'></div>");
+// $('canvas').on( 'mousemove', onMouseMove, false );
+window.addEventListener( 'click', onMouseClick, false );
+
+function onMouseMove(e)
+{
+  mouseVector.x = 2 * (e.clientX / SCREEN_WIDTH) - 1;
+  mouseVector.y = 1 - 2 * ( e.clientY / SCREEN_HEIGHT );
+  //console.log(e.clientX);
+
+  raycaster.setFromCamera( mouseVector.clone(), camera );
+  var intersects = raycaster.intersectObjects( cubes.children );
+  cubes.children.forEach(function( cube ) {
+    cube.material.color.setRGB( cube.grayness, cube.grayness, cube.grayness );
+  });
+
+  for( var i = 0; i < intersects.length; i++ ) {
+    var intersection = intersects[ i ],
+    obj = intersection.object;
+    obj.material.color.setRGB( 1.0 - i / intersects.length, 0, 0 );
+
+  }
+}
+
+function onMouseClick(e){
+  mouseVector.x = 2 * (e.clientX / SCREEN_WIDTH) - 1;
+  mouseVector.y = 1 - 2 * ( e.clientY / SCREEN_HEIGHT );
+  //console.log(e.clientX);
+
+  raycaster.setFromCamera( mouseVector.clone(), camera );
+  var intersects = raycaster.intersectObjects( cubes.children );
+  cubes.children.forEach(function( cube ) {
+    cube.material.color.setRGB( cube.grayness, cube.grayness, cube.grayness );
+  });
+
+  console.log(' you are on id no -- ' + intersects[0].object.userData.id[0]);
+}
 
 var animate = function(){
   requestAnimationFrame( animate );
   controls.update();
 };
 
-render();
-animate();
 
 function setupInputSliderButton()
 {
@@ -428,3 +466,8 @@ function treeMapPosition() {
       .style("width", function(d) { return Math.max(0, d.dx - 1) + "px"; })
       .style("height", function(d) { return Math.max(0, d.dy - 1) + "px"; });
 }
+
+
+
+render();
+animate();

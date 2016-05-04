@@ -38,6 +38,15 @@
 
 
   //////////////
+  // RENDER //
+  //////////////
+  var render = function() {
+      requestAnimationFrame( render );
+      renderer.render(scene, camera);
+      renderer.setSize(window.innerWidth - 20, window.innerHeight - 20);
+  };
+
+  //////////////
 	// CONTROLS //
 	//////////////
 	// move mouse and: left   click to rotate,
@@ -77,57 +86,73 @@
 
   var range = 10;
 
-     for(var i = 0; i < rooms.length; i++ ) {
-       console.log(rooms[i]);
+  cubes = new THREE.Object3D();
+  scene.add( cubes );
 
-        var geom = new THREE.CubeGeometry( rooms[i].w, rooms[i].l, i*10  );
+ for(var i = 0; i < rooms.length; i++ ) {
+   console.log(rooms[i]);
 
-             var grayness = Math.random() * 0.5 + 0.25,
-                     mat = new THREE.MeshLambertMaterial(
-                       {
-                         color: 0xffffff
-                       }
-                     ),
-                     cube = new THREE.Mesh( geom, mat );
-                    scene.add(cube);
-            // mat.color.setRGB(Math.random(0,255),Math.random(0,255),150);
-             cube.position.set(rooms[i].xpos, rooms[i].ypos, i*5 );
-             //cube.position.set( range * (0.5 - Math.random()), range * (0.5 - Math.random()), range * (0.5 - Math.random()) );
-             cube.rotation.set( 0, 0, 0);
-             cube.grayness = grayness; // *** NOTE THIS
-            //  cubes.add( cube );
-
-     }
-
-
-  //  var cube = new THREE.Mesh(geometry, material);
-  //  scene.add(cube);
-  //   cube.rotation.x += 50;
-  //   cube.rotation.y += 50;
-  //   cube.rotation.z -= 5;
-   //
-
-
-    // camera.position.x =  200;
-    // camera.position.z =  600;
-    // camera.position.y =  -800;
-    //
-    // camera.rotation.x =  0.985 ;
-    // camera.rotation.y = 0.3 ;
-    // camera.rotation.z = 0 ;
+    var geom = new THREE.CubeGeometry( rooms[i].w, rooms[i].l, i*10  );
 
 
 
-   var render = function() {
-       requestAnimationFrame( render );
-       renderer.render(scene, camera);
-       renderer.setSize(window.innerWidth - 20, window.innerHeight - 20);
-   };
+     var grayness = Math.random() * 0.5 + 0.25,
+       mat = new THREE.MeshLambertMaterial(
+         {
+           color: 0xffffff
+         }
+       ),
+       cube = new THREE.Mesh( geom, mat );
+            //scene.add(cube);
+    // mat.color.setRGB(Math.random(0,255),Math.random(0,255),150);
+        cube.position.set(rooms[i].xpos, rooms[i].ypos, i*5 );
+        //cube.position.set( range * (0.5 - Math.random()), range * (0.5 - Math.random()), range * (0.5 - Math.random()) );
+        cube.rotation.set( 0, 0, 0);
+        cube.grayness = grayness; // *** NOTE THIS
+        cube.userData = {
+                   id: i
+               };
+        cubes.add( cube );
+        console.log(cube);
+        console.log(cubes);
 
+ }
+
+
+
+  // var projector = new THREE.Projector();
+  var mouseVector = new THREE.Vector3();
+  var raycaster = new THREE.Raycaster();
+
+  window.addEventListener( 'mousemove', onMouseMove, false );
+
+  function onMouseMove(e)
+  {
+    mouseVector.x = 2 * (e.clientX / SCREEN_WIDTH) - 1;
+    mouseVector.y = 1 - 2 * ( e.clientY / SCREEN_HEIGHT );
+    console.log(e.clientX);
+
+    // var raycaster = projector.pickingRay( mouseVector.clone(), camera );
+    raycaster.setFromCamera( mouseVector.clone(), camera );
+    var intersects = raycaster.intersectObjects( cubes.children );
+    cubes.children.forEach(function( cube ) {
+      cube.material.color.setRGB( cube.grayness, cube.grayness, cube.grayness );
+    });
+
+    for( var i = 0; i < intersects.length; i++ ) {
+      var intersection = intersects[ i ],
+      obj = intersection.object;
+      obj.material.color.setRGB( 1.0 - i / intersects.length, 0, 0 );
+      console.log('intersects -- ' + i);
+    }
+    // console.log(intersects[0].object.userData.id);
+
+
+  }
 
   var animate = function(){
-    requestAnimationFrame( animate );
-    controls.update();
+  requestAnimationFrame( animate );
+  controls.update();
   };
 
 

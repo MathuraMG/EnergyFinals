@@ -1,3 +1,6 @@
+/******************
+MAIN DIVS
+******************/
 .roomData {
   display: inline-block;
   width: 49%;
@@ -7,7 +10,27 @@
   display: inline-block;
   width: 49%;
 }
+.room-data-section {
+  display: none;
+}
+.floor-data-section {
+  width: 49%;
+  display: inline-block;
+  float: right;
+}
+.three-model-container {
+  /*float: left;*/
+  width: 50%;
+  height: 70%;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left:0;
+}
 
+/******************
+FOR TEXT DISPLAY
+******************/
 .energy-key-name {
   display: inline-block;
   width: 50%;
@@ -22,6 +45,10 @@
   font-weight: 400;
 }
 
+/******************
+INPUTS
+******************/
+
 .input-slider-container {
   display: block;
   width: 100%;
@@ -33,6 +60,15 @@
 .input-slider-button  {
   margin: 15px auto;
   font-size: 1em;
+}
+
+.input-section {
+  width: 20%;
+  height: 30%;
+  display: inline-block;
+  position: absolute;
+  bottom: 0;
+  left:0;
 }
 
 /******************
