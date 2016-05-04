@@ -1,0 +1,128 @@
+//done
+index.js:105 3f5cbcb8-9e09-4005-b1eb-2acd28c81e56 -- Area 404
+
+//not there
+index.js:105 76d631e0-22a8-4e74-a980-f18db7b9a3af -- Cafe
+index.js:105 2070f912-7116-4e30-8632-717aa261b322 -- Corridor
+index.js:105 b41642aa-bd2d-40e3-89ef-b39d9a9d81f2 -- Entrance Hall
+index.js:105 1bc4dc5c-79c6-4608-9cc0-8bdb68ba4ce8 -- Hallway
+index.js:105 cb60c3d8-5d22-4531-887f-8371dd50a542 -- Hallway Near Elevator
+index.js:105 6326a394-9949-4595-b59f-9df207e60ec3 -- Hallway (Server Rm & Rm 440)
+
+//used for electrical
+index.js:105 391b4bf3-49b7-420f-ab30-3a26cc689021 -- Electrical Closet
+
+
+
+//used for mechanical
+index.js:105 99e06963-7d13-4535-8a3a-a91c88685ce1 -- Mechanical Rm
+
+
+
+//used twice for all restrooms
+index.js:105 2ee5c7a3-95da-43e6-947b-8cce6e208300 -- Restroom
+
+
+//used for dano
+index.js:105 ac82c89e-5ddd-4036-9ed6-4fd3f9dee4a9 -- Rm 401, 402
+
+//used for meeting room
+index.js:105 06017978-2591-4562-a61d-3fad65c623b0 -- Rm 402
+index.js:105 80a0c045-1f6e-4b8c-96a3-5d2865ea5f6e -- Rm 402
+
+//used for room 20
+index.js:105 2b9e3545-b62f-4b9f-9053-254b99e14c9c -- Rm 406
+
+
+
+//used for power tools shop
+index.js:105 b121b9e6-44e6-40b3-b787-ee667bfa084d -- Rm 409 (Shop)
+
+//used for 441
+index.js:105 0b6f6bb3-f99e-4567-9ee4-2afc9e7d2858 -- Rm 441
+index.js:105 5574f6e1-92c3-4c86-bc4d-a95460a1fccf -- Rm 441,442
+
+//used for 440
+index.js:105 6076f431-ea09-44ec-b39f-faf084b809e6 -- Rm 441, Rm 440s
+
+//used for 442
+index.js:105 4b6a1f2e-b40d-4cc6-8119-217259a75249 -- Rm 442
+index.js:105 cc4409e0-a20e-4930-8631-3179ad504951 -- Rm 442, 444
+
+
+
+index.js:105 12c6d7a6-a553-428a-85f2-7e1cac29444a -- Rm 446, 448, 449, 451a, 451b
+index.js:105 773eece8-c7c6-425a-9d4f-93a2c4954c66 -- Rm 447
+
+//used for 449
+index.js:105 cdcca04b-84be-43a7-85d7-6bff674e9fc3 -- Rm 449
+
+//used for 452
+index.js:105 bd28d53e-cd24-4b91-aa43-67d1be48775c -- Rm 452
+index.js:105 eec99ebb-f25c-4c2e-be20-26db452b4c11 -- Rm 452, 453, 454
+
+//used for 453
+index.js:105 c394d51e-0219-437f-8b22-9f2ebe38ba7f -- Rm 453
+
+//used for 454
+index.js:105 a5eda9b6-a8ce-4b31-80e9-2642b882dc3f -- Rm 454, 455, 455A
+
+//used for 455
+index.js:105 9b32823e-4e37-46e5-b7d4-b6c50bd73d74 -- Rm 455
+
+
+//used for current adjunct lounge
+index.js:105 df425001-2ac9-4ada-8a0a-d501f0c5bbba -- Rm 455A
+
+//used for 451b
+index.js:105 b1014897-e74c-43ae-8784-dd181a5b53e7 -- Room 451b
+
+
+//used for 451a
+index.js:105 208860ea-c823-4a77-ba85-3e981e9ffdd9 -- Room 449, 451a, 451b, 452
+
+//used for 448
+index.js:105 756fbd3e-066f-405e-b133-508fc5f18e85 -- Room 448
+
+
+//used for 446
+index.js:105 a5fb6f3c-2c4b-4f01-acc5-0d2e7738e3a6 -- Room 446
+
+//used for 444
+index.js:105 c36b477c-c0f2-4436-84c2-30abe8dc68b1 -- Room 444
+
+//used for 456/tech staf
+index.js:105 8305dd98-7c27-4dd0-955d-5893a487da5e -- Rm 456
+
+//used for 445
+index.js:105 19a39365-6d88-4a06-b9ce-a1653695d449 -- Room 445
+index.js:105 d0b102ee-e0a4-40f6-9795-ab8745f0ef33 -- Rm 445
+
+//used for lounge
+index.js:105 efa01903-ca25-4501-9920-d34fa61de5e9 -- Kitchen
+index.js:105 3f8d1934-c26b-48e0-8dae-50f585c06874 -- Lounge
+index.js:105 162eb6a4-7c1f-4705-8621-fea79e4d0b96 -- Room 446, Lounge
+index.js:105 9aef2ed1-a67b-4459-b9b7-053b2b3ced14 -- Rm 444, Lounge
+
+//used for 447
+index.js:105 743a9bf0-ff82-4667-abdf-c4bc313c10d2 -- Room 447
+
+
+//used for cabinet
+index.js:105 72ae9733-6ba4-4429-a5f4-736fdac64354 -- Server Rm
+index.js:105 3a8ed866-2cb6-401c-a339-09ac79b0852b -- Server Room
+
+//used for pcomp shop
+index.js:105 52c426ce-6e16-4ff7-8b4a-0228fd65b670 -- Rm 409
+index.js:105 ce007293-7a34-4a61-80a1-d92312e6cfa9 -- Shop Area
+
+
+
+
+index.js:105 528c1f41-2d4e-494d-a576-c364867f04a7 -- Unknown
+
+
+index.js:105 3ab5d8ab-4082-4a50-9f5a-18b7da04c991 -- Woodshop
+
+
+index.js:105 cb4d8d3f-c476-4216-9292-43d45610c027 -- Floor 4

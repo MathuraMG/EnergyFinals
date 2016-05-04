@@ -128,7 +128,7 @@ function makeAjaxCallToGetSchema(timeRange)
         $('.roomData').empty();
         $('#visualisation').empty();
         for(var i =0;i<subLocationData.length;i++){
-          if(subLocationData[i].data.names[0] && subLocationData[i].totalEnergy)
+          if(true)//subLocationData[i].data.names[0] && subLocationData[i].totalEnergy)
           {
             energyKey = $('<div>');
             console.log('making the shizz');
@@ -158,59 +158,6 @@ function makeAjaxCallToGetSchema(timeRange)
   });
 }
 
-function getRoomData(roomId)
-{
-  console.log('fetching data for -- ' + roomId);
-  for(var i=0;i<schema.length;i++)
-  {
-    var equipmentList = '';
-    // console.log('compare : ' + schema[i].id + ' -- ' + roomId);
-    if(schema[i].id.localeCompare(roomId) == 0)
-    {
-      console.log('the room is -- ' + schema[i].name);
-      for(var j =0;j<schema[i].equipments.length;j++)
-      {
-        equipmentList = equipmentList.concat(schema[i].equipments[j]);
-        if(j!=schema[i].equipments.length-1){
-            equipmentList = equipmentList.concat(',');
-        }
-      }
-      $.ajax({
-        url: serverUrl + '/floordata_itp?startTime=' + startTime + '&equipmentId=' + equipmentList,
-        success: function(result){
-          console.log('going to parse data');
-          console.log(result);
-          equipmentData = result;
-        }
-      }).done(function(){
-        // $('.room-data-section').fadeIn(500);
-        $('.floor-data-section').fadeOut(500);
-        var energyKey;
-        var energyValue;
-        $('.roomData').empty();
-        $('#visualisation').empty();
-        plotLineGraph(equipmentData);
-        drawTreeMap(equipmentData);
-
-        for(var i =0;i<equipmentData.length;i++){
-          if(equipmentData[i].data.names[0] && equipmentData[i].totalEnergy)
-          {
-            energyKey.click(function(){
-              console.log(this);
-              console.log(this.id);
-              getRoomData(this.id);
-              createRooms(this.id);
-              $('.floor-data-section').fadeIn(500);
-            })
-          }
-
-        }
-      })
-      return;
-    }
-  }
-
-}
 
 var cubes;
 
@@ -221,7 +168,12 @@ function showGraph(subLocationData) {
 
   for(var i = 0; i < rooms.length; i++ ) {
 
-    var geom = new THREE.CubeGeometry( rooms[i].w, rooms[i].l, subLocationData[i].totalEnergy*5  );
+    var tempTotalEnergy = 0;
+    for(var j =0;j<rooms[i].sublocationId.length;j++){
+      tempTotalEnergy += getEnergyForSubLocation(rooms[i].sublocationId[j]);
+    }
+
+    var geom = new THREE.CubeGeometry( rooms[i].w, rooms[i].l, tempTotalEnergy*5  );
     var grayness = Math.random() * 0.5 + 0.25,
     mat = new THREE.MeshLambertMaterial(
       {
@@ -230,17 +182,28 @@ function showGraph(subLocationData) {
     ),
     cube = new THREE.Mesh( geom, mat );
     scene.add(cube);
-    //mat.color.setRGB(255, 170, 150);
-    //mat.color.setRGB(Math.random(0,255),Math.random(0,255),150);
-    cube.position.set(rooms[i].xpos, rooms[i].ypos, subLocationData[i].totalEnergy*5/2); // change the center of 'z' to the base
-    //cube.position.set( range * (0.5 - Math.random()), range * (0.5 - Math.random()), range * (0.5 - Math.random()) );
+    cube.position.set(rooms[i].xpos, rooms[i].ypos, tempTotalEnergy*5/2); // change the center of 'z' to the base
     cube.rotation.set( 0, 0, 0);
     cube.grayness = grayness; // *** NOTE THIS
     cube.userData = {
-               id: rooms[i].equipments,
+               id: rooms[i].sublocationId,
            };
     cubes.add( cube );
 
+  }
+}
+
+function getEnergyForSubLocation(id)
+{
+  for(var i=0;i<subLocationData.length;i++)
+  {
+    if(subLocationData[i].id.localeCompare(id)==0){
+      return subLocationData[i].totalEnergy;
+    }
+    else
+    {
+      continue;
+    }
   }
 }
 
@@ -282,9 +245,63 @@ function onMouseClick(e){
   cubes.children.forEach(function( cube ) {
     cube.material.color.setRGB( cube.grayness, cube.grayness, cube.grayness );
   });
-
+  getRoomsData(intersects[0].object.userData.id);
   console.log(' you are on id no -- ' + intersects[0].object.userData.id[0]);
 }
+
+
+function getRoomData(subLocationIdList){
+  for(var i =0 ;i<subLocationIdList.length;i++){
+    console.log('sublocations -- ' + subLocationIdList[i]);
+  }
+}
+
+function getRoomsData(subLocationIdList)
+{
+  // console.log('fetching data for -- ' + roomId[0]);
+  var equipmentList = '';
+  for(var a =0 ;a<subLocationIdList.length;a++){
+    for(var i=0;i<schema.length;i++)
+    {
+      if(schema[i].id.localeCompare(subLocationIdList[a]) == 0)
+      {
+        console.log('the room is -- ' + schema[i].name);
+        for(var j =0;j<schema[i].equipments.length;j++)
+        {
+          equipmentList = equipmentList.concat(schema[i].equipments[j]);
+          if(true){//j!=schema[i].equipments.length-1){
+              equipmentList = equipmentList.concat(',');
+          }
+        }
+      }
+    }
+  }
+  console.log(equipmentList);
+   equipmentList=equipmentList.slice(0,-1);
+   console.log(equipmentList);
+  $.ajax({
+    url: serverUrl + '/floordata_itp?startTime=' + startTime + '&equipmentId=' + equipmentList,
+    success: function(result){
+      console.log('going to parse data');
+      console.log(result);
+      equipmentData = result;
+    }
+  }).done(function(){
+    $('.room-data-section').fadeIn(500);
+    $('.floor-data-section').fadeOut(500);
+    $('.three-model-container').fadeOut(500);
+    var energyKey;
+    var energyValue;
+    $('.roomData').empty();
+    $('#visualisation').empty();
+    plotLineGraph(equipmentData);
+    drawTreeMap(equipmentData);
+
+  })
+  return;
+
+}
+
 
 var animate = function(){
   requestAnimationFrame( animate );
