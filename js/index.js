@@ -251,12 +251,6 @@ function onMouseClick(e){
 }
 
 
-function getRoomData(subLocationIdList){
-  for(var i =0 ;i<subLocationIdList.length;i++){
-    console.log('sublocations -- ' + subLocationIdList[i]);
-  }
-}
-
 function getRoomsData(subLocationIdList)
 {
   // console.log('fetching data for -- ' + roomId[0]);
