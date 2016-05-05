@@ -35,7 +35,6 @@ camera.lookAt(scene.position);
 //set renderer
 var renderer = new THREE.WebGLRenderer( {antialias:true} );
 renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-renderer.setClearColor(0xffffff, 1);
 document.body.appendChild(renderer.domElement);
 
 
@@ -343,6 +342,7 @@ function getRoomsData(subLocationIdList)
     $('#visualisation').empty();
     plotLineGraph(equipmentData);
     drawTreeMap(equipmentData);
+    drawCircles(equipmentData);
 
   })
   return;
@@ -376,10 +376,10 @@ function setupInputSliderButton()
 
 //display most used Equipment in the last 5 hours
 function showMostUsedEquipmentLast5Hours() {
-  var mostUsedEquipmentLast5Hours = d3.select("#embed-most-used-equipment-image").append("img")
-      .attr("src","http://upload.wikimedia.org/wikipedia/commons/b/b0/NewTux.svg")
-      .attr("width", 200)
-      .attr("height", 200)
+  // var mostUsedEquipmentLast5Hours = d3.select("#embed-most-used-equipment-image").append("img")
+  //     .attr("src","http://upload.wikimedia.org/wikipedia/commons/b/b0/NewTux.svg")
+  //     .attr("width", 200)
+  //     .attr("height", 200)
 }
 
 //
@@ -591,6 +591,48 @@ function plotLineGraph(allLineData){
     .attr('fill', 'none')
     .attr('class',classNamePath);
   }
+
+}
+
+function drawCircles(equipmentData){
+  console.log('DRAWING CIRCLES');
+
+  var data = d3.range(20).map(function() { return [Math.random() * innerWidth/2, Math.random() * 485]; });
+  var color = d3.scale.category10();
+
+  var circles = d3.select(".circles-container")
+      .on("touchstart", nozoom)
+      .on("touchmove", nozoom)
+    .append("svg")
+      .attr("width", innerWidth * 0.7)
+      .attr("height", innerHeight * 0.7)
+    .selectAll("circle")
+      .data(data)
+    .enter().append("circle")
+      .attr("transform", function(d) { return "translate(" + d + ")"; })
+      .attr("r", 32)
+      .style("fill", function(d, i) { return color(i); })
+      .on("click", showEquipmentDetails)
+
+
+  function showEquipmentDetails(d, i) {
+    //if (d3.event.defaultPrevented) return; // dragged
+
+    d3.select(this).transition()
+        .style("fill", "black")
+        .attr("r", 64)
+        .transition()
+        .attr("r", 32)
+        .style("fill", color(i));
+
+    d3.select("circles").append("text")
+                   .text("hello");
+  }
+
+  function nozoom() {
+    d3.event.preventDefault();
+  }
+
 
 }
 
