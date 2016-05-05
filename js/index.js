@@ -14,10 +14,6 @@ $(document).ready(function(){
   var noOfHours = 24 -parseInt($('.input-slider')[0].value);
   makeAjaxCallToGetSchema(noOfHours);
 
-  // getFloorLineGraph();
-  //timeRange = parseInt($('.input-slider')[0].value);
-  //makeAjaxCallToGetSchema(timeRange);
-
 })
 
 
@@ -25,7 +21,7 @@ $(document).ready(function(){
 //set scene
 var scene = new THREE.Scene();
 
-var SCREEN_WIDTH = window.innerWidth/2, SCREEN_HEIGHT = window.innerHeight*0.7;
+var SCREEN_WIDTH = window.innerWidth*0.7, SCREEN_HEIGHT = window.innerHeight*0.7;
 var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 20000;
 
 
@@ -49,7 +45,7 @@ THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) }); // toggle full-scre
 var render = function() {
   requestAnimationFrame( render );
   renderer.render(scene, camera);
-  renderer.setSize(window.innerWidth/2 - 20, window.innerHeight*0.7 - 20);
+  renderer.setSize(window.innerWidth*0.7 - 20, window.innerHeight*0.7 - 20);
 };
 
 console.log("*****************MATHURA***************");

@@ -62,6 +62,18 @@ FOR TEXT DISPLAY
 }
 
 /******************
+PLUG IT IN SECTION
+******************/
+.plug-it-in-data {
+  display: block;
+  position: absolute;
+  height: 70%;
+  width: 30%;
+  right: 0;
+  top: 0;
+}
+
+/******************
 Page 1 - ID
 ******************/
 
