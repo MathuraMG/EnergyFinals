@@ -97,6 +97,19 @@ INPUTS
 }
 
 /******************
+LINE GRAPH-OVERALL
+******************/
+#visualisation-line {
+  display: inline-block;
+  width: 80%;
+  height: 25%;
+  vertical-align: top;
+  position: absolute;
+  bottom:0;
+  right: 0;
+}
+
+/******************
 LINE GRAPH
 ******************/
 
