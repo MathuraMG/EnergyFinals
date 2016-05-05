@@ -22,7 +22,7 @@ $(document).ready(function(){
 var scene = new THREE.Scene();
 
 var SCREEN_WIDTH = window.innerWidth*0.7, SCREEN_HEIGHT = window.innerHeight*0.7;
-var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 20000;
+var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 1, FAR = 20000;
 
 
 //set camera
@@ -35,6 +35,7 @@ camera.lookAt(scene.position);
 //set renderer
 var renderer = new THREE.WebGLRenderer( {antialias:true} );
 renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+renderer.setClearColor(0xffffff, 1);
 document.body.appendChild(renderer.domElement);
 
 
@@ -90,6 +91,7 @@ function makeAjaxCallToGetSchema(timeRange)
 
     }
   }).done(function(){
+
     $.ajax({
       url: serverUrl + '/schema_itp',
       success: function(result){
@@ -157,6 +159,7 @@ function makeAjaxCallToGetSchema(timeRange)
               console.log(this);
               console.log(this.id);
               getRoomData(this.id);
+              $('.itp-floor-line-graph').remove();
               $('.room-data-section').fadeIn(500);
               $('.floor-data-section').fadeOut(500);
               $('.three-model-container').fadeOut(500);
@@ -182,8 +185,10 @@ function showGraph(subLocationData) {
     for(var j =0;j<rooms[i].sublocationId.length;j++){
       tempTotalEnergy += getEnergyForSubLocation(rooms[i].sublocationId[j]);
     }
+    if(tempTotalEnergy == 0)
+      tempTotalEnergy =0.0002;
 
-    var geom = new THREE.CubeGeometry( rooms[i].w, rooms[i].l, tempTotalEnergy*5  );
+    var geom = new THREE.CubeGeometry( rooms[i].w, rooms[i].l, tempTotalEnergy*10  );
     var grayness = Math.random() * 0.5 + 0.25,
     mat = new THREE.MeshLambertMaterial(
       {
@@ -193,7 +198,7 @@ function showGraph(subLocationData) {
 
     cube = new THREE.Mesh( geom, mat );
     scene.add(cube);
-    cube.position.set(rooms[i].xpos, rooms[i].ypos, tempTotalEnergy*5/2); // change the center of 'z' to the base
+    cube.position.set(rooms[i].xpos, rooms[i].ypos, tempTotalEnergy*5); // change the center of 'z' to the base
     cube.rotation.set( 0, 0, 0);
     cube.grayness = grayness; // *** NOTE THIS
     cube.userData = {
@@ -270,8 +275,16 @@ function onMouseClick(e){
       {
         console.log('matches');
         for(var k=0;k<subLocationData[i].data.data.length;k++){
-          //Object.keys(itpFloorData.data.data[0])[1]
-          var temp = subLocationData[i].data.data[k][Object.keys(subLocationData[i].data.data[0])[1]];
+          var temp;
+
+          if(Object.keys(subLocationData[i].data.data[0])[1].localeCompare('x')){
+            temp = subLocationData[i].data.data[k][Object.keys(subLocationData[i].data.data[0])[1]];
+          }
+          else
+          {
+            temp = subLocationData[i].data.data[k][Object.keys(subLocationData[i].data.data[0])[0]];
+          }
+
           if(roomDataYAxis[k]){
             roomDataYAxis[k] += temp;
           }
@@ -348,11 +361,13 @@ function setupInputSliderButton()
   var noOfHours = 24 -parseInt($('.input-slider')[0].value);
   $('.input-slider-button').click(function(){
     makeAjaxCallToGetSchema(noOfHours);
+    $('#visualisation-line').empty();
   })
   var a = new Date(new Date() - noOfHours*60000*60);
   $('.input-slider-value').html(a.toString().slice(0,-15));
 
   $('.input-slider').on("click",function(){
+
     noOfHours = 24 -parseInt($('.input-slider')[0].value);
     var a = new Date(new Date() - noOfHours*60000*60);
     $('.input-slider-value').html(a.toString().slice(0,-15));
