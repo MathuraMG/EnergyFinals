@@ -23,7 +23,7 @@ $(document).ready(function(){
 //set scene
 var scene = new THREE.Scene();
 
-var SCREEN_WIDTH = window.innerWidth*0.7, SCREEN_HEIGHT = window.innerHeight*0.7;
+var SCREEN_WIDTH = window.innerWidth*0.7, SCREEN_HEIGHT = window.innerHeight*0.8;
 var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 1, FAR = 20000;
 
 
@@ -47,7 +47,7 @@ THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) }); // toggle full-scre
 var render = function() {
   requestAnimationFrame( render );
   renderer.render(scene, camera);
-  renderer.setSize(window.innerWidth*0.7 - 20, window.innerHeight*0.7 - 20);
+  renderer.setSize(window.innerWidth*0.7 - 20, window.innerHeight*0.8 - 20);
 };
 
 console.log("*****************MATHURA***************");
@@ -164,6 +164,7 @@ function makeAjaxCallToGetSchema(timeRange)
               $('.room-data-section').fadeIn(500);
               $('.floor-data-section').fadeOut(500);
               $('.three-model-container').fadeOut(500);
+              $('.input-slider-container').fadeOut(500);
             })
           }
         }
@@ -199,11 +200,12 @@ function showGraph(subLocationData) {
 
     cube = new THREE.Mesh( geom, mat );
     scene.add(cube);
-    cube.position.set(rooms[i].xpos, rooms[i].ypos, tempTotalEnergy*5); // change the center of 'z' to the base
+    cube.position.set(rooms[i].xpos, rooms[i].ypos-250, tempTotalEnergy*5); // change the center of 'z' to the base
     cube.rotation.set( 0, 0, 0);
     cube.grayness = grayness; // *** NOTE THIS
     cube.userData = {
                id: rooms[i].sublocationId,
+               name: rooms[i].name
            };
     cubes.add( cube );
 
@@ -236,7 +238,7 @@ function onMouseMove(e)
 {
   mouseVector.x = 2 * (e.clientX / SCREEN_WIDTH) - 1;
   mouseVector.y = 1 - 2 * ( e.clientY / SCREEN_HEIGHT );
-  //console.log(e.clientX);
+  // console.log(e.clientX);
 
   raycaster.setFromCamera( mouseVector.clone(), camera );
   var intersects = raycaster.intersectObjects( cubes.children );
@@ -249,7 +251,9 @@ function onMouseMove(e)
     obj = intersection.object;
     obj.material.color.setRGB( 1.0 - i / intersects.length, 0, 0 );
 
+
   }
+  // $('.hover-room').html(intersects[0].object.userData.name);
 }
 
 function onMouseClick(e){
@@ -338,6 +342,7 @@ function getRoomsData(subLocationIdList)
     $('.room-data-section').fadeIn(500);
     $('.floor-data-section').fadeOut(500);
     $('.three-model-container').fadeOut(500);
+    $('.input-slider-container').fadeOut(500);
     var energyKey;
     var energyValue;
     $('.roomData').empty();
@@ -372,6 +377,7 @@ function setupInputSliderButton()
 
   $('.input-slider').on("click",function(){
 
+
     noOfHours = 24 -parseInt($('.input-slider')[0].value);
     var a = new Date(new Date() - noOfHours*60000*60);
     $('.input-slider-value').html(a.toString().slice(0,-15));
@@ -403,7 +409,7 @@ function drawCircles(equipmentData){
       .on("touchmove", nozoom)
     .append("svg")
       .attr("width", innerWidth * 0.7)
-      .attr("height", innerHeight * 0.7)
+      .attr("height", innerHeight * 0.8)
     .selectAll("circle")
       .data(data)
     .enter().append("circle")
@@ -446,7 +452,7 @@ function appendRoomLineGraph(roomData){
   })
 
   var vis = d3.select('#visualisation-line')
-  WIDTH = 0.8*innerWidth-40,
+  WIDTH = innerWidth-40,
   HEIGHT = 0.2*innerHeight-40,
   MARGINS = {
     top: 20,
@@ -492,7 +498,7 @@ function showFloorGraph(itpFloorData){
   })
 
   var vis = d3.select('#visualisation-line'),
-      WIDTH = 0.8*innerWidth-40,
+      WIDTH = innerWidth-40,
       HEIGHT = 0.2*innerHeight-40,
       MARGINS = {
         top: 20,
@@ -512,12 +518,13 @@ function showFloorGraph(itpFloorData){
       xAxis = d3.svg.axis()
         .scale(xRange)
         .tickSize(2)
-        .ticks(3)
+        .ticks(5)
         .tickFormat(d3.time.format("%e %b %I %M %p"))
 
       y1Axis = d3.svg.axis()
         .scale(yRange)
         .tickSize(2)
+        .ticks(3)
         .orient('left')
         .tickSubdivide(true);
 
@@ -569,8 +576,8 @@ function plotLineGraph(allLineData){
   }
 
   var vis = d3.select('#visualisation'),
-      WIDTH = 0.34*innerWidth-40,
-      HEIGHT = 0.7*innerHeight-40,
+      WIDTH = 0.69*innerWidth-40,
+      HEIGHT = 0.34*innerHeight-40,
       MARGINS = {
         top: 20,
         right: 20,
@@ -601,12 +608,18 @@ function plotLineGraph(allLineData){
   vis.append('svg:g')
     .attr('class', 'line-graph-axis')
     .attr('transform', 'translate(0,' + (HEIGHT - MARGINS.bottom) + ')')
-    .call(xAxis);
+    .call(xAxis)
+    .attr('stroke', '#fff')
+    .attr('fill', '#fff')
+    .attr('width', '0.5px')
 
   vis.append('svg:g')
     .attr('class', 'line-graph-axis')
     .attr('transform', 'translate(' + (MARGINS.left) + ',0)')
-    .call(y1Axis);
+    .call(y1Axis)
+    .attr('stroke', '#fff')
+    .attr('fill', '#fff')
+    .attr('width', '0.5px')
 
   var lineFunc = d3.svg.line()
     .x(function(d) {
@@ -628,7 +641,7 @@ function plotLineGraph(allLineData){
     // console.log( 'Mathura -- ' + Object.keys(allLineData[i].data.data[0])[1] );
     var className = allLineData[i].data.names[0];
     className = className.replace(/[^\w]/gi, '');
-    var color = d3.hsl(360-colorIndex*15, 0.4,0.65);
+    var color = d3.rgb((360-colorIndex*15)%150+100, (360-colorIndex*15)%150+100,(360-colorIndex*15)%150+100);
     colorIndex++;
     var classNamePath = className + ' graphPath';
 
@@ -724,7 +737,7 @@ function drawTreeMap(equipmentData){
       } )
       .call(treeMapPosition)
       .style("background-color", function(d) {
-          return d.name == 'tree' ? '#fff' : d3.hsl(360-d.index*15, 0.4,0.65) }) //color(d.name);
+          return d.name == 'tree' ? '#000' : d3.rgb((360-d.index*15)%150+100, (360-d.index*15)%150+100,(360-d.index*15)%150+100)}) //color(d.name);
       .append('div')
       .on("click",function(d){
         // console.log(' you just clicked on -- ' + d.name);

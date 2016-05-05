@@ -9,5 +9,6 @@ function backButton() {
     $('.floor-data-section').fadeIn(500);
     $('.three-model-container').fadeIn(500);
     $('.appended-line-graph').remove();
+    $('.input-slider-container').fadeIn(500);
   });
 }

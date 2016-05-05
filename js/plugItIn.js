@@ -29,5 +29,5 @@ setInterval(function(){
   }, 60000);
 
   function displayPlugItInData(result){
-    $('.plug-it-in-value').html(result[0].data.data[0]['Outlet']);
+    $('.plug-it-in-value').html((result[0].data.data[0]['Outlet']*1000).toFixed(0) + ' W');
   }

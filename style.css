@@ -52,7 +52,7 @@ MAIN DIVS
 .three-model-container {
   /*float: right;*/
   width: 50%;
-  height: 70%;
+  height: 80%;
   display: inline-block;
   /*position: absolute;*/
   top: 0;
@@ -66,14 +66,14 @@ FOR TEXT DISPLAY
   display: inline-block;
   width: 50%;
 
-  font-family: Raleway;
+  font-family: Fedra Mono;
   font-weight: 700;
 }
 
 .energy-value {
   display: inline-block;
   width: 50%;
-  font-family: Raleway;
+  font-family: Fedra Mono;
   font-weight: 400;
 }
 
@@ -93,11 +93,12 @@ PLUG IT IN SECTION
 }
 
 .plug-it-in-value {
-  display: inline-block;
+  display: block;
   color: white;
   font-family: Fedra Mono;
-  font-size: 1em;
+  font-size: 2em;
   text-align: center;
+  margin-top: 5%;
 }
 /******************
 Page 1 - ID
@@ -113,6 +114,10 @@ Page 1 - ID
 /******************
 INPUTS
 ******************/
+.hover-room {
+  font-family: Fedra Mono;
+  font-size: 1em;
+}
 
 .input-slider-container {
   display: block;
@@ -234,13 +239,14 @@ LINE GRAPH
 
 #visualisation {
   display: inline-block;
-  width: 34%;
-  height: 69%;
+  width: 69%;
+  height: 240px;
   vertical-align: top;
+  margin-top:40px;
 }
 
 .line-graph-axis {
-  font-family: Wire One;
+  font-family: Fedra Mono;
 }
 
 /******************
@@ -248,20 +254,20 @@ TREE MAP
 ******************/
 .tree-map-room-container {
   display: inline-block;
-  height: 34%;
+  height: 40%;
   width: 69%;
 }
 
 .tree-map-room {
 
-  font-family: Wire One;
+  font-family: Fedra Mono;
   font-weight: 400;
-  border: solid 1px white;
+  border: solid 1px black;
   line-height: 0.95;
   overflow: hidden;
   position: absolute;
   border-radius: 6px;
-  background-image: -webkit-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
+  /*background-image: -webkit-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
   background-image:    -moz-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
   background-image:     -ms-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
   background-image:      -o-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
@@ -271,7 +277,7 @@ TREE MAP
       -1px 1px 2px hsla(0,0%,100%,0.25),
       1px -1px 2px hsla(0,0%,100%,0.25),
       -1px 0px 2px hsla(0,0%,100%,0.25),
-      1px 0px 2px hsla(0,0%,100%,0.25);
+      1px 0px 2px hsla(0,0%,100%,0.25);*/
 
 }
 
@@ -285,6 +291,10 @@ TREE MAP
 }
 
 .back-to-home {
-  font-family: Wire One;
+  font-family: Fedra Mono;
   font-size: 1.5em;
+  position: absolute;
+  top:10px;
+  left: 10px;
+  color: white;
 }
