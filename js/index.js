@@ -1,5 +1,5 @@
-var serverUrl = "https://itpenertivserver.herokuapp.com";
-// var serverUrl = "http://0.0.0.0:5000";
+// var serverUrl = "https://itpenertivserver.herokuapp.com";
+var serverUrl = "http://0.0.0.0:5000";
 
 var schema ;
 var startTime;
