@@ -234,8 +234,8 @@ LINE GRAPH
 
 #visualisation {
   display: inline-block;
-  width: 49%;
-  height: 500px;
+  width: 34%;
+  height: 69%;
   vertical-align: top;
 }
 
@@ -248,7 +248,8 @@ TREE MAP
 ******************/
 .tree-map-room-container {
   display: inline-block;
-  width: 49%;
+  height: 34%;
+  width: 69%;
 }
 
 .tree-map-room {

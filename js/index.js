@@ -1,5 +1,7 @@
 // var serverUrl = "https://itpenertivserver.herokuapp.com";
-var serverUrl = "http://0.0.0.0:5000";
+var serverUrl = 'https://agile-reef-71741.herokuapp.com';
+// var serverUrl = "http://0.0.0.0:5000";
+
 
 var schema ;
 var startTime;
@@ -567,8 +569,8 @@ function plotLineGraph(allLineData){
   }
 
   var vis = d3.select('#visualisation'),
-      WIDTH = 0.5*innerWidth-40,
-      HEIGHT = 0.5*innerHeight-40,
+      WIDTH = 0.34*innerWidth-40,
+      HEIGHT = 0.7*innerHeight-40,
       MARGINS = {
         top: 20,
         right: 20,
@@ -700,8 +702,8 @@ function drawTreeMap(equipmentData){
     });
   }
 
-  var width = 0.5*innerWidth-40,
-    height = 0.5*innerHeight-40,
+  var width = 0.7*innerWidth-40,
+    height = 0.34*innerHeight-40,
     color = d3.scale.category20c(),
     div = d3.select(".tree-map-room-container").append("div")
        .style("position", "relative");
