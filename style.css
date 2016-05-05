@@ -1,12 +1,26 @@
+@font-face {
+  font-family: Fedra Mono;
+  src:  url('fonts/FedraMono-Normal.otf');
+}
+
+body {
+  background-color: black;
+}
+
+p{
+  font-family: Fedra Mono;
+  color: white;
+}
+
 /******************
 MAIN DIVS
 ******************/
 
 .floor-data-section {
-  width: 100%;
-  height: 100%;
+  width: 30%;
+  height: 70%;
   display: inline-block;
-  float: left;
+  float: right;
 }
 
 .floorData {
@@ -17,10 +31,11 @@ MAIN DIVS
 }
 
 .info-viz {
+  background-color:black;
   display: inline-block;
-  width: 51%;
+  width: 100%;
   height: 100%;
-  float: left;
+  float: right;
 }
 
 
@@ -50,6 +65,7 @@ FOR TEXT DISPLAY
 .energy-key-name {
   display: inline-block;
   width: 50%;
+
   font-family: Raleway;
   font-weight: 700;
 }
@@ -65,7 +81,10 @@ FOR TEXT DISPLAY
 PLUG IT IN SECTION
 ******************/
 .plug-it-in-data {
-  display: block;
+  display: inline-block;
+  color: white;
+  font-family: Fedra Mono;
+  font-size: 1em;
   position: absolute;
   height: 70%;
   width: 30%;
@@ -73,13 +92,22 @@ PLUG IT IN SECTION
   top: 0;
 }
 
+.plug-it-in-value {
+  display: inline-block;
+  color: white;
+  font-family: Fedra Mono;
+  font-size: 1em;
+  text-align: center;
+}
 /******************
 Page 1 - ID
 ******************/
 
 #embed-most-used-equipment-image {
-  display: inline-block;
-  float: left;
+  display: block;
+  padding:10px;
+  height: 100%;
+  text-align: center;
 }
 
 /******************
@@ -88,15 +116,36 @@ INPUTS
 
 .input-slider-container {
   display: block;
+  padding-left: 10px;
   width: 100%;
-  font-family: Raleway;
+  color: white;
+  font-family: Fedra Mono;
   font-size: 1em;
-  text-align: center;
+  text-align: left;
 }
 
 .input-slider-button  {
   margin: 15px auto;
-  font-size: 1em;
+  font-size: 0.9em;
+  font-family: Fedra Mono;
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+
+}
+
+.input-slider-label {
+  font-family: Fedra Mono;
+  color:white;
+}
+
+.input-slider-value {
+  font-family: Fedra Mono;
+  color:white;
 }
 
 .input-section {
@@ -104,22 +153,78 @@ INPUTS
   height: 30%;
   display: inline-block;
   position: absolute;
-  bottom: 0;
+  top: 10;
   left:0;
 }
+
+
+
+/******************
+CIRCLES
+******************/
+
+.circles-container {
+  background-color:yellow;
+  display: inline-block;
+  width: 70%;
+  height: 485px;
+  float: left;
+}
+
+
 
 /******************
 LINE GRAPH-OVERALL
 ******************/
-#visualisation-line {
-  display: inline-block;
-  width: 80%;
-  height: 25%;
+
+.overall-line-graph {
+  background-color: darkgoldenrod;
+  width: 100%;
+  height: 20%;
   vertical-align: top;
   position: absolute;
-  bottom:0;
-  right: 0;
+  bottom: 0;
+  left: 0;
+
 }
+
+
+#visualisation-line {
+  padding-left: 50px;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  font-family: Fedra Mono;
+  text-decoration-color:white;
+  font-style: normal;
+  /*vertical-align: top;
+  position: absolute;
+  bottom:0;
+  left: 0;
+}
+
+/******************
+LINE GRAPH
+******************/
+
+#visualisation {
+  display: inline-block;
+  width: 49%;
+  height: 500px;
+  vertical-align: top;
+}
+
+.line-graph-axis {
+  font-family: Fedra Mono;
+  color: white;
+}
+
+.back-to-home {
+  font-color: white;
+  font-family: Fedra Mono;
+  font-size: 1.5em;
+}
+
 
 /******************
 LINE GRAPH
