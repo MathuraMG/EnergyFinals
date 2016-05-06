@@ -253,7 +253,7 @@ function onMouseMove(e)
 
 
   }
-  // $('.hover-room').html(intersects[0].object.userData.name);
+  $('.hover-room').html(intersects[0].object.userData.name);
 }
 
 function onMouseClick(e){

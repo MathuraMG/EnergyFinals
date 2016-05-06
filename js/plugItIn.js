@@ -3,7 +3,7 @@ var serverUrl = 'https://agile-reef-71741.herokuapp.com';
 // var serverUrl = "http://0.0.0.0:5000";
 var oneMin = 120*1000;
 
-var outletToCheck = '91c24a2f-fcaa-4d39-945b-6584d1133437';
+var outletToCheck = '3297470f-7277-4820-b8f6-6e7a28879067';
 
 //call the outlet every 1 minute to check if the number has changed
 setInterval(function(){
