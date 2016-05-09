@@ -1,15 +1,15 @@
 @font-face {
-  font-family: Fedra Mono;
+  font-family: Raleway;
   src:  url('fonts/FedraMono-Normal.otf');
 }
 
 body {
-  background-color: black;
+  background-color: #ffffff;
 }
 
 p{
-  font-family: Fedra Mono;
-  color: white;
+  font-family: Raleway;
+  color: #000000;
 }
 
 /******************
@@ -31,7 +31,7 @@ MAIN DIVS
 }
 
 .info-viz {
-  background-color:black;
+  background-color:#ffffff;
   display: inline-block;
   width: 100%;
   height: 100%;
@@ -66,14 +66,14 @@ FOR TEXT DISPLAY
   display: inline-block;
   width: 50%;
 
-  font-family: Fedra Mono;
+  font-family: Raleway;
   font-weight: 700;
 }
 
 .energy-value {
   display: inline-block;
   width: 50%;
-  font-family: Fedra Mono;
+  font-family: Raleway;
   font-weight: 400;
 }
 
@@ -82,8 +82,8 @@ PLUG IT IN SECTION
 ******************/
 .plug-it-in-data {
   display: inline-block;
-  color: white;
-  font-family: Fedra Mono;
+  color: #000000;
+  font-family: Raleway;
   font-size: 1em;
   position: absolute;
   height: 70%;
@@ -94,8 +94,8 @@ PLUG IT IN SECTION
 
 .plug-it-in-value {
   display: block;
-  color: white;
-  font-family: Fedra Mono;
+  color: #000000;
+  font-family: Raleway;
   font-size: 2em;
   text-align: center;
   margin-top: 5%;
@@ -115,17 +115,17 @@ Page 1 - ID
 INPUTS
 ******************/
 .hover-room {
-  font-family: Fedra Mono;
+  font-family: Raleway;
   font-size: 1em;
-  color: white;
+  color: #000000;
 }
 
 .input-slider-container {
   display: block;
   padding-left: 10px;
   width: 100%;
-  color: white;
-  font-family: Fedra Mono;
+  color: #000000;
+  font-family: Raleway;
   font-size: 1em;
   text-align: left;
 }
@@ -133,10 +133,10 @@ INPUTS
 .input-slider-button  {
   margin: 15px auto;
   font-size: 0.9em;
-  font-family: Fedra Mono;
-  background-color: #4CAF50; /* Green */
+  font-family: Raleway;
+  background-color: #888888;
   border: none;
-  color: white;
+  color: #000000;
   padding: 10px 10px;
   text-align: center;
   text-decoration: none;
@@ -145,25 +145,30 @@ INPUTS
 }
 
 .input-slider-label {
-  font-family: Fedra Mono;
-  color:white;
+  font-family: Raleway;
+  color:#000000;
 }
 
 .input-slider-value {
-  font-family: Fedra Mono;
-  color:white;
+  font-family: Raleway;
+  color:#000000;
 }
 
 .input-section {
-  width: 20%;
+  
   height: 30%;
-  display: inline-block;
+  display: inline;
   position: absolute;
   top: 10;
   left:0;
 }
 
-
+.dial {
+  float:left;
+  width:300px;
+  height:300px;
+  padding:20px;
+}
 
 /******************
 CIRCLES
@@ -184,7 +189,7 @@ LINE GRAPH-OVERALL
 ******************/
 
 .overall-line-graph {
-  background-color: darkgoldenrod;
+  background-color: #dddddd;
   width: 100%;
   height: 20%;
   vertical-align: top;
@@ -200,8 +205,8 @@ LINE GRAPH-OVERALL
   display: inline-block;
   width: 100%;
   height: 100%;
-  font-family: Fedra Mono;
-  text-decoration-color:white;
+  font-family: Raleway;
+  text-decoration-color:#000000;
   font-style: normal;
   vertical-align: top;
   position: absolute;
@@ -221,13 +226,13 @@ LINE GRAPH
 }
 
 .line-graph-axis {
-  font-family: Fedra Mono;
-  color: white;
+  font-family: Raleway;
+  color: #000000;
 }
 
 .back-to-home {
-  font-color: white;
-  font-family: Fedra Mono;
+  font-color: #000000;
+  font-family: Raleway;
   font-size: 1.5em;
 }
 
@@ -247,7 +252,7 @@ LINE GRAPH
 }
 
 .line-graph-axis {
-  font-family: Fedra Mono;
+  font-family: Raleway;
 }
 
 /******************
@@ -261,9 +266,9 @@ TREE MAP
 
 .tree-map-room {
 
-  font-family: Fedra Mono;
+  font-family: Raleway;
   font-weight: 400;
-  border: solid 1px black;
+  border: solid 1px #ffffff;
   line-height: 0.95;
   overflow: hidden;
   position: absolute;
@@ -292,10 +297,10 @@ TREE MAP
 }
 
 .back-to-home {
-  font-family: Fedra Mono;
+  font-family: Raleway;
   font-size: 1.5em;
   position: absolute;
   top:10px;
   left: 10px;
-  color: white;
+  color: #000000;
 }

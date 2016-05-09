@@ -11,6 +11,7 @@
     <!-- libraries from cdn -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/d3/2.10.0/d3.v2.min.js "></script>
+    <script src="http://cdn.jque.re/plugins/forms-controls/jquery-knob/js/jquery.knob.js"></script>
 
     <!-- Js file with room coordinates -->
     <script type="text/javascript" src="js/rooms.js"></script>
@@ -22,7 +23,7 @@
     <script src="js/houseKeeping.js"></script>
 
     <!-- js to poll data about what you plug in -->
-    <script src="js/plugItIn.js"></script>
+    <!-- <script src="js/plugItIn.js"></script> -->
 
 
     <!-- libraries -->
@@ -42,13 +43,21 @@
   </head>
   <body>
 
+
+
     <section class='input-section'>
+
+
       <div class="input-slider-container">
-        <div class="input-slider-label"> Start Time : </div>
-        <input class="input-slider" id="time-range" type="range" value="23" min="0" max="24"> </input>
+        <!-- <div class="input-slider-label"> Start Time : </div> -->
+        <input type="text" value="19" class="dial input-slider" data-displayInput="true" data-displayPrevious="true"></input>
         <div class="input-slider-value">  </div>
-        <button class="input-slider-button">Find Energy for selected time</button>
-        <div class='hover-room'></div>
+        <!-- <button class="input-slider-button">Find Energy for selected time</button> -->
+        <!-- <div class='hover-room'></div> -->
+
+
+
+
       </div>
 
 
