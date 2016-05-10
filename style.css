@@ -4,7 +4,7 @@
 }
 
 body {
-  background-color: #ffffff;
+  background-color: #fff3e6;
 }
 
 p{
@@ -155,7 +155,7 @@ INPUTS
 }
 
 .input-section {
-  
+
   height: 30%;
   display: inline;
   position: absolute;
@@ -165,9 +165,9 @@ INPUTS
 
 .dial {
   float:left;
-  width:300px;
-  height:300px;
-  padding:20px;
+  width:150px;
+  height:50px;
+  padding:0px;
 }
 
 /******************
@@ -189,7 +189,7 @@ LINE GRAPH-OVERALL
 ******************/
 
 .overall-line-graph {
-  background-color: #dddddd;
+  background-color: #FFE6CC;
   width: 100%;
   height: 20%;
   vertical-align: top;
@@ -201,17 +201,46 @@ LINE GRAPH-OVERALL
 
 
 #visualisation-line {
-  padding-left: 50px;
+  padding-left: 5%;
   display: inline-block;
-  width: 100%;
+  width: 70%;
   height: 100%;
   font-family: Raleway;
-  text-decoration-color:#000000;
+  /*text-decoration-color:#000000;*/
   font-style: normal;
   vertical-align: top;
   position: absolute;
   bottom:0;
   left: 0;
+}
+
+
+/******************
+INDEX
+******************/
+.line-graph-index {
+  margin-top: 2%;
+  display: inline-block;
+  right: 0;
+  font-family: Raleway;
+  position: absolute;
+  width: 20%;
+  height: 100%;
+}
+
+.line-graph-index-name {
+  display: inline;
+  width: 50%;
+  font-size: 1em;
+  vertical-align: top;
+}
+
+.line-graph-index-box {
+  display: inline-block;
+  width: 40%;
+  margin: 0 5%;
+  height: 1em;
+  background-color: #8BFF00;
 }
 
 /******************
@@ -227,14 +256,23 @@ LINE GRAPH
 
 .line-graph-axis {
   font-family: Raleway;
-  color: #000000;
+  font-size: 0.5em;
+  font-weight: 100;
 }
 
 .back-to-home {
-  font-color: #000000;
   font-family: Raleway;
   font-size: 1.5em;
 }
+
+.line-graph-index-box#room {
+  background-color: #FF0000;
+}
+
+.empty-index-box {
+  background-color: #FFE6CC;
+}
+
 
 
 /******************
@@ -253,6 +291,12 @@ LINE GRAPH
 
 .line-graph-axis {
   font-family: Raleway;
+}
+
+.overall-line-graph-axis {
+  font-family: Raleway;
+  font-size: 0.5em;
+  font-weight: 100;
 }
 
 /******************

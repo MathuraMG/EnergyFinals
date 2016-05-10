@@ -1,48 +1,5 @@
-function drawCircles(equipmentData){
-  console.log('DRAWING CIRCLES');
-
-  var data = d3.range(20).map(function() { return [Math.random() * innerWidth/2, Math.random() * 485]; });
-  var color = d3.scale.category10();
-
-  var circles = d3.select(".circles-container")
-      .on("touchstart", nozoom)
-      .on("touchmove", nozoom)
-    .append("svg")
-      .attr("width", innerWidth * 0.7)
-      .attr("height", innerHeight * 0.8)
-    .selectAll("circle")
-      .data(data)
-    .enter().append("circle")
-      .attr("transform", function(d) { return "translate(" + d + ")"; })
-      .attr("r", 32)
-      .style("fill", function(d, i) { return color(i); })
-      .on("click", showEquipmentDetails)
-
-
-  function showEquipmentDetails(d, i) {
-    //if (d3.event.defaultPrevented) return; // dragged
-
-    d3.select(this).transition()
-        .style("fill", "black")
-        .attr("r", 64)
-        .transition()
-        .attr("r", 32)
-        .style("fill", color(i));
-
-    d3.select("circles").append("text")
-                   .text("hello");
-  }
-
-  function nozoom() {
-    d3.event.preventDefault();
-  }
-
-
-}
-
 function appendRoomLineGraph(roomData){
 
-  console.log(roomData);
   var yMax;
 
   yMax = d3.max(roomData,function(d)
@@ -79,7 +36,7 @@ function appendRoomLineGraph(roomData){
 
   vis.append('svg:path')
   .attr('d', lineFunc(roomData))
-  .attr('stroke', '#aa1122')
+  .attr('stroke', '#ff0000')
   .attr('stroke-width', 2)
   .attr('fill', 'none')
   .attr('class','appended-line-graph');
@@ -88,7 +45,6 @@ function appendRoomLineGraph(roomData){
 }
 
 function showFloorGraph(itpFloorData){
-  console.log(itpFloorData);
   var yMax;
 
   yMax = d3.max(itpFloorData.data.data,function(d)
@@ -128,12 +84,12 @@ function showFloorGraph(itpFloorData){
         .tickSubdivide(true);
 
   vis.append('svg:g')
-    .attr('class', 'line-graph-axis')
+    .attr('class', 'overall-line-graph-axis')
     .attr('transform', 'translate(0,' + (HEIGHT - MARGINS.bottom) + ')')
     .call(xAxis);
 
   vis.append('svg:g')
-    .attr('class', 'line-graph-axis')
+    .attr('class', 'overall-line-graph-axis')
     .attr('transform', 'translate(' + (MARGINS.left) + ',0)')
     .call(y1Axis);
 
@@ -148,7 +104,7 @@ function showFloorGraph(itpFloorData){
 
   vis.append('svg:path')
   .attr('d', lineFunc(itpFloorData.data.data))
-  .attr('stroke', '#444444')
+  .attr('stroke', '#8BFF00')
   .attr('stroke-width', 2)
   .attr('fill', 'none')
   .attr('class','itp-floor-line-graph');
@@ -159,9 +115,6 @@ function showFloorGraph(itpFloorData){
 
 function plotLineGraph(allLineData){
 
-  // console.log(allLineData);
-  // console.log( new Date(allLineData[0].data.data[0].x) + ' -- ' + new Date(allLineData[0].data.data[allLineData[0].data.data.length-1].x));
-
   var yMax = 0;
   for(var i =0;i<allLineData.length;i++){
     tempYMax = d3.max(allLineData[i].data.data,function(d)
@@ -171,7 +124,6 @@ function plotLineGraph(allLineData){
     if(tempYMax>yMax){
       yMax = tempYMax;
     }
-    // console.log(yMax + ' -- ' + tempYMax);
   }
 
   var vis = d3.select('#visualisation'),
@@ -230,18 +182,28 @@ function plotLineGraph(allLineData){
     .interpolate('basis');
 
   var noOfGraphs = allLineData.length;
-  //console.log('no of graphs -- ' + noOfGraphs);
 
   var allIndexDiv = document.getElementsByClassName('allIndexButtons')[0];
   var colorIndex =0;
+
+  var totalColorIndex = 0;
   for(var i=0;i<noOfGraphs;i++){
 
-    // console.log('drawing graph for -- ' + allLineData[i].data.names[0] );
-    // console.log( 'Mathura -- ' + Object.keys(allLineData[i].data.data[0])[1] );
+    var className = allLineData[i].data.names[0];
+    if(allLineData[i].totalEnergy > 0) {
+      totalColorIndex++;
+    }
+  }
+
+  for(var i=0;i<noOfGraphs;i++){
+
+    if(allLineData[i].totalEnergy > 0) {
+      colorIndex++;
+    }
     var className = allLineData[i].data.names[0];
     className = className.replace(/[^\w]/gi, '');
-    var color = d3.rgb((360-colorIndex*15)%150+100, (360-colorIndex*15)%150+100,(360-colorIndex*15)%150+100);
-    colorIndex++;
+    var color = d3.hsl(90-colorIndex*(90/totalColorIndex),1,0.7);
+
     var classNamePath = className + ' graphPath';
 
     vis.append('svg:path')
@@ -254,60 +216,20 @@ function plotLineGraph(allLineData){
 
 }
 
-function drawCircles(equipmentData){
-  console.log('DRAWING CIRCLES');
-
-  var data = d3.range(20).map(function() { return [Math.random() * innerWidth/2, Math.random() * 485]; });
-  var color = d3.scale.category10();
-
-  var circles = d3.select(".circles-container")
-      .on("touchstart", nozoom)
-      .on("touchmove", nozoom)
-    .append("svg")
-      .attr("width", innerWidth * 0.7)
-      .attr("height", innerHeight * 0.7)
-    .selectAll("circle")
-      .data(data)
-    .enter().append("circle")
-      .attr("transform", function(d) { return "translate(" + d + ")"; })
-      .attr("r", 32)
-      .style("fill", function(d, i) { return color(i); })
-      .on("click", showEquipmentDetails)
-
-
-  function showEquipmentDetails(d, i) {
-    //if (d3.event.defaultPrevented) return; // dragged
-
-    d3.select(this).transition()
-        .style("fill", "black")
-        .attr("r", 64)
-        .transition()
-        .attr("r", 32)
-        .style("fill", color(i));
-
-    d3.select("circles").append("text")
-                   .text("hello");
-  }
-
-  function nozoom() {
-    d3.event.preventDefault();
-  }
-
-
-}
-
 function drawTreeMap(equipmentData){
-  // console.log('DRAWING A TREE MAP');
 
   var tree = {
     'name' : 'tree',
     'children' : []
   } ;
+  var colorIndex = 0;
   for(var i =0 ;i<equipmentData.length;i++)
   {
-    // console.log( equipmentData[i].data.names[0] + ' -- ' + equipmentData[i].totalEnergy*1000 );
+    if(equipmentData[i].totalEnergy > 0) {
+      colorIndex++;
+    }
     tree.children.push({
-      'index':i,
+      'index':colorIndex,
       'name':equipmentData[i].data.names[0],
       'value':Math.floor(equipmentData[i].totalEnergy*1000),
       'size':equipmentData[i].totalEnergy*1000
@@ -326,27 +248,27 @@ function drawTreeMap(equipmentData){
       .value(function(d) { return d.size; });
 
   var node = div.datum(tree).selectAll(".node")
-      .data(treemap.nodes)
-      .enter().append("div")
-      .attr("class", "tree-map-room")
-    //   var className = 'class-'+allLineData[fullRoomIndex].name;
-    // className = className.replace(/\s+/g, '');
-      .attr("class", function(d){
-        return ('tree-map-room class-' + d.name.replace(/[^\w]/gi, ''));
-      } )
-      .call(treeMapPosition)
-      .style("background-color", function(d) {
-          return d.name == 'tree' ? '#fff' : d3.rgb((360-d.index*15)%150+100, (360-d.index*15)%150+100,(360-d.index*15)%150+100)}) //color(d.name);
-      .append('div')
-      .on("click",function(d){
-        // console.log(' you just clicked on -- ' + d.name);
-        var tempClassName = '.'+d.name.replace(/[^\w]/gi, '');
-        $(tempClassName).toggle(500);
-        $('.class-'+d.name.replace(/[^\w]/gi, '')).toggleClass('tree-map-room-saturate');
-      })
-      .style("font-size", function(d) {
-          return Math.max(0.5, 0.01*Math.sqrt(d.area))+'em'; })
-      .text(function(d) { return d.children ? null : d.name + ' ('+ Math.floor(d.value) + ')'; });
+    .data(treemap.nodes)
+    .enter().append("div")
+    .attr("class", "tree-map-room")
+  //   var className = 'class-'+allLineData[fullRoomIndex].name;
+  // className = className.replace(/\s+/g, '');
+    .attr("class", function(d){
+      return ('tree-map-room class-' + d.name.replace(/[^\w]/gi, ''));
+    } )
+    .call(treeMapPosition)
+    .style("background-color", function(d) {
+        return d.name == 'tree' ? '#fff' : d3.hsl(90-d.index*(90/colorIndex),1,0.7)})
+    .append('div')
+    .on("click",function(d){
+
+      var tempClassName = '.'+d.name.replace(/[^\w]/gi, '');
+      $(tempClassName).toggle(500);
+      $('.class-'+d.name.replace(/[^\w]/gi, '')).toggleClass('tree-map-room-saturate');
+    })
+    .style("font-size", function(d) {
+        return Math.max(0.5, 0.01*Math.sqrt(d.area))+'em'; })
+    .text(function(d) { return d.children ? null : d.name + ' ('+ Math.floor(d.value) + ')'; });
 }
 
 function treeMapPosition() {
@@ -356,4 +278,24 @@ function treeMapPosition() {
       .style("top", function(d) { return d.y + "px"; })
       .style("width", function(d) { return Math.max(0, d.dx - 1) + "px"; })
       .style("height", function(d) { return Math.max(0, d.dy - 1) + "px"; });
+}
+
+function sortData(equipmentData) {
+  console.log('BEFORE: ');
+  for(var  i =0;i<equipmentData.length;i++){
+    if(equipmentData[i].totalEnergy == null){
+      equipmentData[i].totalEnergy = 0;
+      console.log('potato');
+    }
+    console.log(equipmentData[i].totalEnergy);
+  }
+  console.log(equipmentData);
+  equipmentData = equipmentData.sort(function(a,b){
+    return a.totalEnergy - b.totalEnergy;
+  })
+  console.log('AFTER: ');
+  for(var  i =0;i<equipmentData.length;i++){
+    console.log(equipmentData[i].totalEnergy);
+  }
+  return equipmentData;
 }

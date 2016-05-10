@@ -8,35 +8,21 @@ var startTime;
 var timeRange;
 var mainLineGraphY;
 
-
-$(document).ready(function(){
-  console.log("document is ready");
-  //Login and get authenticated
-  setupInputSliderButton();
-  var noOfHours = 24 -parseInt($('.input-slider')[0].value);
-  makeAjaxCallToGetSchema(noOfHours);
-
-  $(".dial").knob({
-    'min':0,
-    'max':23,
-    'fgColor':'#ff0000'
-});
-
-})
-
+//Three JS variables
+var scene;
+var camera;
+var renderer;
+var SCREEN_WIDTH = window.innerWidth*0.7, SCREEN_HEIGHT = window.innerHeight*0.8;
+var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 1, FAR = 20000;
 
 //Three.js
 //set scene
 var scene = new THREE.Scene();
 
-var SCREEN_WIDTH = window.innerWidth*0.7, SCREEN_HEIGHT = window.innerHeight*0.8;
-var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 1, FAR = 20000;
-
-
 //set camera
 var camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
 scene.add(camera);
-camera.position.set(100,-1700,1500);
+camera.position.set(100*.52,-1700*.52,1500*.52);
 camera.lookAt(scene.position);
 
 //set renderer
@@ -53,37 +39,33 @@ var render = function() {
   requestAnimationFrame( render );
   renderer.render(scene, camera);
   renderer.setSize(window.innerWidth*0.7 - 20, window.innerHeight*0.8 - 20);
-  renderer.setClearColor(0xffffff);
+  renderer.setClearColor(0xfff3e6);
 };
-
-console.log("*****************MATHURA***************");
-console.log(render);
 
 //set controls (using lib - OrbitControls.js)
 var controls;
 controls = new THREE.OrbitControls( camera, renderer.domElement );
 controls.addEventListener( 'change', render )
 
-// create a light
-var light = new THREE.PointLight(0x000000);
-light.position.set(500,-10,120);
-scene.add(light);
+$(document).ready(function(){
+  //Login and get authenticated
+  setupInputSliderButton();
+  var noOfHours = 24 -parseInt($('.input-slider')[0].value);
+  makeAjaxCallToGetSchema(noOfHours);
 
-var light = new THREE.PointLight(0x0000FF);
-light.position.set(100,-100,0);
-scene.add(light);
+  $(".dial").knob({
+    'min':0,
+    'max':23,
+    'fgColor':'#ff0000',
+    'lineCap':'round',
+    'width':'150',
+    'height':'150',
+    'thickness':'0.1'
+  });
 
-// var light = new THREE.PointLight(0x00FFFF);
-// light.position.set(-100,-10,1000);
-// scene.add(light);
+})
 
-// var ambientLight = new THREE.AmbientLight(0x111111);
-// scene.add(ambientLight);
-
-
-
-function makeAjaxCallToGetSchema(timeRange)
-{
+function makeAjaxCallToGetSchema(timeRange) {
   var now = new Date();
   startTime = now - timeRange*60000*60 ;// temp hack for EST. Conert to moment js - 4*60000*60
   startTime = new Date(startTime);
@@ -93,7 +75,6 @@ function makeAjaxCallToGetSchema(timeRange)
   $.ajax({
     url: serverUrl + '/login?loginId=horsetrunk12',
     success: function(result){
-      console.log('result from the server -- ' + result);
       console.log('LOGGED IN');
 
     }
@@ -103,30 +84,24 @@ function makeAjaxCallToGetSchema(timeRange)
       url: serverUrl + '/schema_itp',
       success: function(result){
         schema = JSON.parse(result);
-        console.log(schema);
       }
     }).done(function(){
-      console.log('SO DONE');
       var subLocationArray = '';
       var outputData = '';
       for(var i =0;i<schema.length;i++)
       {
-        console.log(schema[i].id + ' -- ' + schema[i].name );
         subLocationArray = subLocationArray.concat(schema[i].id);
         if(i!=schema.length-1){
           subLocationArray = subLocationArray.concat(',');
         }
       }
-      console.log(subLocationArray);
       $.ajax({
         url: serverUrl + '/floordata_itp?startTime=' + startTime + '&sublocationId=' + subLocationArray,
         success: function(result){
-          console.log('going to parse data');
           subLocationData = result;
 
           // data is ready, show the graph
           showGraph(subLocationData);
-          //console.log(subLocationData);
           showMostUsedEquipmentLast5Hours();
 
         }
@@ -134,7 +109,6 @@ function makeAjaxCallToGetSchema(timeRange)
         console.log('data parsed');
         var energyKey;
         var energyValue;
-        console.log(subLocationData.length);
         $('.floorData').empty();
         $('.roomData').empty();
         $('#visualisation').empty();
@@ -143,35 +117,11 @@ function makeAjaxCallToGetSchema(timeRange)
           {
             if(subLocationData[i].id.localeCompare('cb4d8d3f-c476-4216-9292-43d45610c027')==0)
             {
+
               mainLineGraphY = showFloorGraph(subLocationData[i]);
             }
             //add the line graph in the bottom - cb4d8d3f-c476-4216-9292-43d45610c027
 
-
-
-            energyKey = $('<div>');
-            //console.log('making the shizz');
-            energyKey.attr('class','energy-key-name');
-            energyKey.attr('id',subLocationData[i].id);
-            energyKey.html(subLocationData[i].data.names[0]);
-            energyKey.data('room-id',subLocationData[i].id);
-            $('.floorData').append(energyKey);
-            // energyKey.data('id',subLocationData[i].id);
-            energyValue = $('<div>');
-            energyValue.attr('class','energy-value');
-            energyValue.html((subLocationData[i].totalEnergy*1000).toFixed(2)+ ' W' );
-            $('.floorData').append(energyValue);
-
-            energyKey.click(function(){
-              console.log(this);
-              console.log(this.id);
-              getRoomData(this.id);
-              $('.itp-floor-line-graph').remove();
-              $('.room-data-section').fadeIn(500);
-              $('.floor-data-section').fadeOut(500);
-              $('.three-model-container').fadeOut(500);
-              $('.input-slider-container').fadeOut(500);
-            })
           }
         }
       })
@@ -200,10 +150,15 @@ function showGraph(subLocationData) {
     }
   }
 
-  scene.add( new THREE.AxisHelper( maxEnergy*10 ) );
+  var axis = new THREE.AxisHelper( 2000 )
+  axis.position.set(-500,0,0);
+  scene.add( axis );
 
-  var gridHelper = new THREE.GridHelper( 500, 20 );
+
+  var gridHelper = new THREE.GridHelper( 1000, 25 );
   gridHelper.rotation.set(0,3.14/2,3.14/2);
+  gridHelper.position.set(0,0,-5);
+  gridHelper.setColors ("#FFE6CC", "#FFE6CC")
   scene.add( gridHelper );
 
   for(var i = 0; i < rooms.length; i++ ) {
@@ -225,9 +180,8 @@ function showGraph(subLocationData) {
 
 
     var ratio = tempTotalEnergy/maxEnergy;
-    console.log('the ratio measured is -- ' + ratio);
-    var test = 80*ratio;
-    var topColor = 'hsl('+280+test+', 100%, 50%)';
+    var test = 90*ratio;
+  var topColor = 'hsl('+(90-test)+', 100%, 50%)';
 
 
 
@@ -239,13 +193,13 @@ function showGraph(subLocationData) {
       new THREE.MeshBasicMaterial({ map: texture[2], transparent: true }),//back wall SET
       new THREE.MeshBasicMaterial({ map: texture[0], transparent: true }),//front wall SET
       new THREE.MeshBasicMaterial({ color:topColor, transparent: true }),
-      new THREE.MeshBasicMaterial({ map: texture[0], transparent: true }),
+      new THREE.MeshBasicMaterial({ color:topColor, transparent: true }),
     ];
     var mat = new THREE.MeshFaceMaterial( cubeMaterials );
     var cube = new THREE.Mesh( geom, mat );
 
     scene.add(cube);
-    cube.position.set(rooms[i].xpos, rooms[i].ypos-250, tempTotalEnergy*5); // change the center of 'z' to the base
+    cube.position.set(rooms[i].xpos, rooms[i].ypos-350, tempTotalEnergy*5); // change the center of 'z' to the base
     cube.rotation.set( 0, 0, 0);
     cube.grayness = grayness; // *** NOTE THIS
     cube.userData = {
@@ -274,16 +228,17 @@ function getEnergyForSubLocation(id)
 var mouseVector = new THREE.Vector3();
 var raycaster = new THREE.Raycaster();
 
-window.addEventListener( 'mousemove', onMouseMove, false );
 $('canvas').wrap("<div class='three-model-container'></div>");
-// $('canvas').on( 'mousemove', onMouseMove, false );
-// window.addEventListener( 'click', onMouseClick, false );
+var modelContainer = document.getElementsByClassName('three-model-container')[0];
+
+modelContainer.addEventListener( 'mousemove', onMouseMove, false );
+
+modelContainer.addEventListener( 'click', onMouseClick, false );
 
 function onMouseMove(e)
 {
   mouseVector.x = 2 * (e.clientX / SCREEN_WIDTH) - 1;
   mouseVector.y = 1 - 2 * ( e.clientY / SCREEN_HEIGHT );
-  // console.log(e.clientX);
 
   raycaster.setFromCamera( mouseVector.clone(), camera );
   var intersects = raycaster.intersectObjects( cubes.children );
@@ -304,7 +259,6 @@ function onMouseMove(e)
 function onMouseClick(e){
   mouseVector.x = 2 * (e.clientX / SCREEN_WIDTH) - 1;
   mouseVector.y = 1 - 2 * ( e.clientY / SCREEN_HEIGHT );
-  //console.log(e.clientX);
 
   raycaster.setFromCamera( mouseVector.clone(), camera );
   var intersects = raycaster.intersectObjects( cubes.children );
@@ -312,6 +266,8 @@ function onMouseClick(e){
   //   cube.material.color.setRGB( cube.grayness, cube.grayness, cube.grayness );
   // });
   getRoomsData(intersects[0].object.userData.id);
+  $('.line-graph-index-name#room').html(intersects[0].object.userData.name);
+  $('.line-graph-index-box#room').removeClass('empty-index-box');
 
   var roomData = [];
   var roomDataYAxis = [];
@@ -323,7 +279,6 @@ function onMouseClick(e){
     for(var j=0;j<intersects[0].object.userData.id.length;j++){
       if(subLocationData[i].id.localeCompare(intersects[0].object.userData.id[j])==0)
       {
-        console.log('matches');
         for(var k=0;k<subLocationData[i].data.data.length;k++){
           var temp;
 
@@ -355,14 +310,12 @@ function onMouseClick(e){
 
 function getRoomsData(subLocationIdList)
 {
-  // console.log('fetching data for -- ' + roomId[0]);
   var equipmentList = '';
   for(var a =0 ;a<subLocationIdList.length;a++){
     for(var i=0;i<schema.length;i++)
     {
       if(schema[i].id.localeCompare(subLocationIdList[a]) == 0)
       {
-        console.log('the room is -- ' + schema[i].name);
         for(var j =0;j<schema[i].equipments.length;j++)
         {
           equipmentList = equipmentList.concat(schema[i].equipments[j]);
@@ -373,14 +326,10 @@ function getRoomsData(subLocationIdList)
       }
     }
   }
-  console.log(equipmentList);
    equipmentList=equipmentList.slice(0,-1);
-   console.log(equipmentList);
   $.ajax({
     url: serverUrl + '/floordata_itp?startTime=' + startTime + '&equipmentId=' + equipmentList,
     success: function(result){
-      console.log('going to parse data');
-      console.log(result);
       equipmentData = result;
     }
   }).done(function(){
@@ -393,11 +342,9 @@ function getRoomsData(subLocationIdList)
     $('.roomData').empty();
     $('#visualisation').empty();
 
+    equipmentData = sortData(equipmentData);
     plotLineGraph(equipmentData);
     drawTreeMap(equipmentData);
-
-//    drawCircles(equipmentData);
-
   })
   return;
 
@@ -426,26 +373,33 @@ function generateTexture(roomEnergy,maxEnergy) {
 
   	// draw gradient
   	context.rect( 0, 0, size, size );
+
     var gradient;
+    var ratio = roomEnergy/maxEnergy;
+    var test = 90*(ratio);
+
     switch(i){
       case 0:
         gradient = context.createLinearGradient( size, size, size, 0);
+        gradient.addColorStop(0,  'hsl(90, 70%, 40%'); // purple
+        gradient.addColorStop(1,  'hsl('+(90-test)+', 70%, 40%'); // gradient colour
         break;
       case 1:
         gradient = context.createLinearGradient( size, size, 0, size);
+        gradient.addColorStop(0,  'hsl(90, 70%, 40%'); // purple
+        gradient.addColorStop(1,  'hsl('+(90-test)+', 70%, 40%'); // gradient colour
         break;
       case 2:
         gradient = context.createLinearGradient( size, 0, size, size);
+        gradient.addColorStop(0,  'hsl(90, 100%, 70%'); // purple
+        gradient.addColorStop(1,  'hsl('+(90-test)+', 100%, 70%'); // gradient colour
         break;
       case 3:
         gradient = context.createLinearGradient( 0, size, size, size);
+        gradient.addColorStop(0,  'hsl(90, 100%, 50%'); // purple
+        gradient.addColorStop(1,  'hsl('+(90-test)+', 100%, 70%'); // gradient colour
         break;
     }
-
-    var ratio = roomEnergy/maxEnergy;
-    var test = 80*(ratio);
-    gradient.addColorStop(0,  'hsl(280, 100%, '+ (i%2 + 1)*20 + '%)'); // purple
-    gradient.addColorStop(1,  'hsl('+280+test+', 100%, '+ (i%2 + 1)*20 + '%)'); // gradient colour
 
   	context.fillStyle = gradient;
   	context.fill();
@@ -464,10 +418,6 @@ function showMostUsedEquipmentLast5Hours() {
   //     .attr("width", 200)
   //     .attr("height", 200)
 }
-
-
-
-
 
 render();
 animate();

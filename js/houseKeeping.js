@@ -10,6 +10,8 @@ function backButton() {
     $('.three-model-container').fadeIn(500);
     $('.appended-line-graph').remove();
     $('.input-slider-container').fadeIn(500);
+    $('.line-graph-index-name#room').empty();
+    $('.line-graph-index-box#room').addClass('empty-index-box');
   });
 }
 
@@ -30,5 +32,6 @@ function setupInputSliderButton()
     $('.input-slider-value').html(a.toString().slice(0,-15));
     makeAjaxCallToGetSchema(noOfHours);
     $('#visualisation-line').empty();
+
   })
 }
