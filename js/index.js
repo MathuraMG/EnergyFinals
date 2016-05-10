@@ -56,11 +56,12 @@ $(document).ready(function(){
   $(".dial").knob({
     'min':0,
     'max':23,
-    'fgColor':'#ff0000',
+    'fgColor':'#FF6666',
     'lineCap':'round',
-    'width':'150',
-    'height':'150',
-    'thickness':'0.1'
+    'width':'100',
+    'height':'100',
+    'thickness':'.5',
+    'bgColor':'#fFE6CC'
   });
 
 })
@@ -152,7 +153,7 @@ function showGraph(subLocationData) {
 
   var axis = new THREE.AxisHelper( 2000 )
   axis.position.set(-500,0,0);
-  scene.add( axis );
+  //scene.add( axis );
 
 
   var gridHelper = new THREE.GridHelper( 1000, 25 );
@@ -185,7 +186,7 @@ function showGraph(subLocationData) {
 
 
 
-    var geom = new THREE.CubeGeometry( rooms[i].w, rooms[i].l, tempTotalEnergy*10  );
+    var geom = new THREE.CubeGeometry( rooms[i].w, rooms[i].l, tempTotalEnergy*50  );
     var grayness = Math.random() * 0.5 + 0.25;
     var cubeMaterials = [
       new THREE.MeshBasicMaterial({ map: texture[1], transparent: true }),//right wall SET
@@ -199,7 +200,7 @@ function showGraph(subLocationData) {
     var cube = new THREE.Mesh( geom, mat );
 
     scene.add(cube);
-    cube.position.set(rooms[i].xpos, rooms[i].ypos-350, tempTotalEnergy*5); // change the center of 'z' to the base
+    cube.position.set(rooms[i].xpos, rooms[i].ypos-350, tempTotalEnergy*25); // change the center of 'z' to the base
     cube.rotation.set( 0, 0, 0);
     cube.grayness = grayness; // *** NOTE THIS
     cube.userData = {
@@ -253,10 +254,21 @@ function onMouseMove(e)
 
 
   }
-  $('.hover-room').html(intersects[0].object.userData.name);
+  if(intersects[0]){
+    $('#mouse-label').css('display','block');
+    $('#mouse-label').html(intersects[0].object.userData.name);
+    $('#mouse-label').css('top',e.clientY);
+    $('#mouse-label').css('left',e.clientX+10);
+    console.log(intersects[0].object.userData.name);
+  }
+  else {
+    $('#mouse-label').css('display','none');
+  }
+
 }
 
 function onMouseClick(e){
+  console.log('clicketh');
   mouseVector.x = 2 * (e.clientX / SCREEN_WIDTH) - 1;
   mouseVector.y = 1 - 2 * ( e.clientY / SCREEN_HEIGHT );
 

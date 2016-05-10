@@ -3,7 +3,7 @@ var rooms = [
   {
     name: "room455",
     equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
-    xpos: 29, //-3500
+    xpos: 29 -350, //-3500
     ypos: 32, //0
     zpos: 0,
     sublocationId: ["9b32823e-4e37-46e5-b7d4-b6c50bd73d74"],
@@ -20,7 +20,7 @@ var rooms = [
 {
   name: "room454",
   equipments: ["42ac967f-fa7d-453e-a119-d538b7b2912d"],
-  xpos: 87, //5-3508
+  xpos: 87 -350, //5-3508
   ypos: 23.5, //0
   zpos: 0,
   sublocationId: ["a5eda9b6-a8ce-4b31-80e9-2642b882dc3f"],
@@ -365,7 +365,7 @@ var rooms = [
   xpos: 209-350,
   ypos: 144,
   zpos: 0,
-  sublocationId: ["99e06963-7d13-4535-8a3a-a91c88685ce1"],
+  sublocationId: [],//["99e06963-7d13-4535-8a3a-a91c88685ce1"],
 
   w: 58-4,
   l: 58-4,

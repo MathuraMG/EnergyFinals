@@ -12,7 +12,7 @@ function appendRoomLineGraph(roomData){
   HEIGHT = 0.2*innerHeight-40,
   MARGINS = {
     top: 20,
-    right: 20,
+    right: 40,
     bottom: 20,
     left: 40
   }

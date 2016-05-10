@@ -165,24 +165,12 @@ INPUTS
 
 .dial {
   float:left;
-  width:150px;
-  height:50px;
+  width:100px;
+  height:30px;
   padding:0px;
+  font-family: Raleway;
+  font-weight: 400;
 }
-
-/******************
-CIRCLES
-******************/
-
-.circles-container {
-  background-color:yellow;
-  display: inline-block;
-  width: 70%;
-  height: 485px;
-  float: left;
-}
-
-
 
 /******************
 LINE GRAPH-OVERALL
@@ -203,7 +191,7 @@ LINE GRAPH-OVERALL
 #visualisation-line {
   padding-left: 5%;
   display: inline-block;
-  width: 70%;
+  width: 80%;
   height: 100%;
   font-family: Raleway;
   /*text-decoration-color:#000000;*/
@@ -295,8 +283,8 @@ LINE GRAPH
 
 .overall-line-graph-axis {
   font-family: Raleway;
-  font-size: 0.5em;
-  font-weight: 100;
+  font-size: 0.6em;
+  font-weight: 400;
 }
 
 /******************
@@ -347,4 +335,18 @@ TREE MAP
   top:10px;
   left: 10px;
   color: #000000;
+}
+
+/***************
+MOUSE LABEL
+***************/
+#mouse-label{
+  display: block;
+  position: absolute;
+  font-family: Raleway;
+  font-size: 0.7em;
+  color: #ffffff;
+  line-height: 2em;
+  padding: 0 2%;
+  background-color: #BB69E2;
 }
